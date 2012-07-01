@@ -1,0 +1,353 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{109A0EB3-FA73-47E6-A371-07AED094E671}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>touhou_music</RootNamespace>
+    <AssemblyName>touhou music</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>D:\touhou music\kcm ver release\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <TargetCulture>zh-Hans</TargetCulture>
+    <ProductName>东方同人音乐管理系统 V.1.3.1  KCM ver.</ProductName>
+    <PublisherName>小洋工作室</PublisherName>
+    <AutorunEnabled>true</AutorunEnabled>
+    <ApplicationRevision>3</ApplicationRevision>
+    <ApplicationVersion>1.3.1.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>false</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>res\76543412312.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>4B88E2AD02A9A97FCF9BD9C32C3622FBE4DE2685</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>touhou music_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="datas\DataPool.cs" />
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form10.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form10.Designer.cs">
+      <DependentUpon>Form10.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form11.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form11.Designer.cs">
+      <DependentUpon>Form11.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form12.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form12.Designer.cs">
+      <DependentUpon>Form12.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form2.Designer.cs">
+      <DependentUpon>Form2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form3.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form3.Designer.cs">
+      <DependentUpon>Form3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form4.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form4.Designer.cs">
+      <DependentUpon>Form4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form5.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form5.Designer.cs">
+      <DependentUpon>Form5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form6.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form6.Designer.cs">
+      <DependentUpon>Form6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form7.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form7.Designer.cs">
+      <DependentUpon>Form7.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form8.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form8.Designer.cs">
+      <DependentUpon>Form8.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form9.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form9.Designer.cs">
+      <DependentUpon>Form9.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="touhou_musicDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>touhou_musicDataSet.xsd</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form10.resx">
+      <DependentUpon>Form10.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form11.resx">
+      <DependentUpon>Form11.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form12.resx">
+      <DependentUpon>Form12.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form2.resx">
+      <DependentUpon>Form2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form3.resx">
+      <DependentUpon>Form3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form4.resx">
+      <DependentUpon>Form4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form5.resx">
+      <DependentUpon>Form5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form6.resx">
+      <DependentUpon>Form6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form7.resx">
+      <DependentUpon>Form7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form8.resx">
+      <DependentUpon>Form8.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form9.resx">
+      <DependentUpon>Form9.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="touhou music_TemporaryKey.pfx" />
+    <None Include="touhou_musicDataSet.xsc">
+      <DependentUpon>touhou_musicDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="touhou_musicDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>touhou_musicDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="touhou_musicDataSet.xss">
+      <DependentUpon>touhou_musicDataSet.xsd</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\广告条.jpg" />
+    <Content Include="res\76543412312.ico" />
+    <None Include="res\not found.bmp" />
+    <None Include="res\新建文件夹\10\Suwako.gif" />
+    <None Include="res\新建文件夹\10\Sizuha.gif" />
+    <None Include="res\新建文件夹\10\Sanae.gif" />
+    <None Include="res\新建文件夹\10\Nitori.gif" />
+    <None Include="res\新建文件夹\10\Momizi.gif" />
+    <None Include="res\新建文件夹\10\Minoriko.gif" />
+    <None Include="res\新建文件夹\10\Kanako.gif" />
+    <None Include="res\新建文件夹\10\Hina.gif" />
+    <None Include="res\新建文件夹\other\Sunnymilk.gif" />
+    <None Include="res\新建文件夹\other\Starsapphire.gif" />
+    <None Include="res\新建文件夹\other\Renko.gif" />
+    <None Include="res\新建文件夹\other\Reisen2.gif" />
+    <None Include="res\新建文件夹\other\Nanashi.gif" />
+    <None Include="res\新建文件夹\other\Merry.gif" />
+    <None Include="res\新建文件夹\other\Lunachild.gif" />
+    <None Include="res\新建文件夹\other\Kourin.gif" />
+    <None Include="res\新建文件夹\other\Fairy.gif" />
+    <None Include="res\新建文件夹\other\Devil.gif" />
+    <None Include="res\新建文件夹\other\Akyu.gif" />
+    <None Include="res\新建文件夹\Yuugi.gif" />
+    <None Include="res\新建文件夹\Syou_nb.gif" />
+    <None Include="res\新建文件夹\Nue_nb.gif" />
+    <None Include="res\新建文件夹\Hatate.gif" />
+    <None Include="res\新建文件夹\105\Tenshi.gif" />
+    <None Include="res\新建文件夹\105\Iku.gif" />
+    <None Include="res\新建文件夹\13\Yosika.gif" />
+    <None Include="res\新建文件夹\13\Toziko.gif" />
+    <None Include="res\新建文件夹\13\Seiga.gif" />
+    <None Include="res\新建文件夹\13\Miko.gif" />
+    <None Include="res\新建文件夹\13\Mamizou.gif" />
+    <None Include="res\新建文件夹\13\Kyouko.gif" />
+    <None Include="res\新建文件夹\13\Huto.gif" />
+    <None Include="res\新建文件夹\12\Nazrin_nb.gif" />
+    <None Include="res\新建文件夹\12\Minamitu_nb.gif" />
+    <None Include="res\新建文件夹\12\Kogasa_nb.gif" />
+    <None Include="res\新建文件夹\12\Ichirin_nb.gif" />
+    <None Include="res\新建文件夹\12\Byakuren_nb.gif" />
+    <None Include="res\新建文件夹\11\Yamame.gif" />
+    <None Include="res\新建文件夹\11\Utsuho_nb.gif" />
+    <None Include="res\新建文件夹\11\Satori_nb.gif" />
+    <None Include="res\新建文件夹\11\Rin_nb.gif" />
+    <None Include="res\新建文件夹\11\Parsee.gif" />
+    <None Include="res\新建文件夹\11\Koishi_nb.gif" />
+    <None Include="res\新建文件夹\11\Kisume.gif" />
+    <None Include="res\新建文件夹\10\Ayamof.gif" />
+    <None Include="res\新建文件夹\09\Yuuka.gif" />
+    <None Include="res\新建文件夹\09\Sikieiki.gif" />
+    <None Include="res\新建文件夹\09\Medicine.gif" />
+    <None Include="res\新建文件夹\09\Komachi.gif" />
+    <None Include="res\新建文件夹\09\Aya.gif" />
+    <None Include="res\新建文件夹\075\Suika.gif" />
+    <None Include="res\新建文件夹\08\Wriggle.gif" />
+    <None Include="res\新建文件夹\08\Udonge.gif" />
+    <None Include="res\新建文件夹\08\Tewi.gif" />
+    <None Include="res\新建文件夹\08\Mystia.gif" />
+    <None Include="res\新建文件夹\08\Mokou.gif" />
+    <None Include="res\新建文件夹\08\Keineex.gif" />
+    <None Include="res\新建文件夹\08\Keine.gif" />
+    <None Include="res\新建文件夹\08\Kaguya.gif" />
+    <None Include="res\新建文件夹\08\Eirin.gif" />
+    <None Include="res\新建文件夹\07\Yuyuko.gif" />
+    <None Include="res\新建文件夹\07\Yukari.gif" />
+    <None Include="res\新建文件夹\07\Youmu.gif" />
+    <None Include="res\新建文件夹\07\Ran.gif" />
+    <None Include="res\新建文件夹\07\Lunasa.gif" />
+    <None Include="res\新建文件夹\07\Lilywhite.gif" />
+    <None Include="res\新建文件夹\07\Letty.gif" />
+    <None Include="res\新建文件夹\07\Chen.gif" />
+    <None Include="res\新建文件夹\07\Alice.gif" />
+    <None Include="res\新建文件夹\06\Sakuya.gif" />
+    <None Include="res\新建文件夹\06\Rumia.gif" />
+    <None Include="res\新建文件夹\06\Remilia.gif" />
+    <None Include="res\新建文件夹\06\Reimu.gif" />
+    <None Include="res\新建文件夹\06\Patchouli.gif" />
+    <None Include="res\新建文件夹\06\Meiling.gif" />
+    <None Include="res\新建文件夹\06\Marisa.gif" />
+    <None Include="res\新建文件夹\06\Flandre.gif" />
+    <None Include="res\新建文件夹\06\Cirno.gif" />
+    <None Include="res\suika.jpg" />
+    <None Include="res\shizuha.jpg" />
+    <None Include="res\sakuya.jpg" />
+    <None Include="res\pachuri.jpg" />
+    <None Include="res\nidori.jpg" />
+    <None Include="res\chiruno.jpg" />
+    <None Include="res\aya.jpg" />
+    <None Include="res\reimu.jpg" />
+    <None Include="res\marisa.jpg" />
+    <None Include="res\lm.jpg" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
