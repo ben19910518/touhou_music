@@ -564,6 +564,13 @@ namespace touhou_music.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap x {
+            get {
+                object obj = ResourceManager.GetObject("x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Yamame {
             get {
                 object obj = ResourceManager.GetObject("Yamame", resourceCulture);

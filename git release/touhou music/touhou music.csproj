@@ -251,6 +251,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\广告条.jpg" />
+    <None Include="Resources\x.jpg" />
     <Content Include="res\76543412312.ico" />
     <None Include="res\not found.bmp" />
     <None Include="res\新建文件夹\10\Suwako.gif" />

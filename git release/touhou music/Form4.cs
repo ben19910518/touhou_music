@@ -15,7 +15,8 @@ namespace touhou_music
 {
     public partial class Form4 : Form
     {
-
+        private byte[] imagebytes;
+        private string fullpath;
         private SqlConnection conn;
         private SqlCommand cmd;
         private string            addacode;
@@ -51,6 +52,12 @@ namespace touhou_music
         }
         private void Form4_Load(object sender, EventArgs e)
         {
+
+         //  imagebytes = ImageToStream(".\\x.jpg");
+         //  imagebytes[0] =0;
+            imagebytes = new byte[1];
+            imagebytes[0] = 0;
+
             connectSQL();
             DataSet ds = new DataSet();
             DataSet ds2 = new DataSet();
@@ -186,6 +193,11 @@ namespace touhou_music
             closeSQL();
         }
 
+        private byte[] ImageToStream(Image image)
+        {
+            throw new NotImplementedException();
+        }
+
         private void connectSQL()
         {
             conn = new SqlConnection(DataPool.conString);
@@ -201,20 +213,10 @@ namespace touhou_music
         private void button1_Click(object sender, EventArgs e)
         {
 
-
+            if (comboBox2.Text == "" || comboBox4.Text == "" || comboBox6.Text == "" || comboBox3.Text == "" || comboBox8.Text == "" || comboBox9.Text == "")
+            { MessageBox.Show("请填写完整带“*”的数据", "提示"); return; }
             
-
-
-
-
-
-
-
-
-
-
-
-
+            
 
             //________________________________________________________________________________________________
             addacode = comboBox2.Text;
@@ -239,54 +241,36 @@ namespace touhou_music
 
 
             connectSQL();
-            string sql = "select oricode from [ori] where origin = '" + addorigin + "'";
-            cmd = new SqlCommand(sql, conn);
 
-            addoricode = cmd.ExecuteScalar() as string;
+                string sqlori = "select oricode from [ori] where origin = '" + addorigin + "'";
+                cmd = new SqlCommand(sqlori, conn);
+
+                addoricode = cmd.ExecuteScalar() as string;
+
+            if(addoricode==null)
+            {  MessageBox.Show("没有找到原曲！","消息提示");
+            closeSQL();
+            Form9 Form9 = new Form9();
+            Form9.ShowDialog();
+
+            return;}
 
 
-
-             sql = "select acode from [album] where acode = '" + addacode + "'";
+                string sql = "select acode from [album] where acode = '" + addacode + "'";
             cmd = new SqlCommand(sql, conn);
                         object obj = cmd.ExecuteScalar();
             //对数据库查询出的值进行判断
             if (obj == null)
             {
                 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-                
-                OpenFileDialog openFileDialog1 = new OpenFileDialog();
 
-                openFileDialog1.Filter = "*jpg|*.JPG|*.GIF|*.GIF|*.BMP|*.BMP";
+                sql = "insert into [album] values ('" + addacode + "','" + addaname + "','" + addtime + "',@cover)";
+                cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.Add("cover", SqlDbType.Image);
 
-                if (openFileDialog1.ShowDialog() == DialogResult.OK)
-                {
-                    string fullpath = openFileDialog1.FileName;//文件路径
+                cmd.Parameters["cover"].Value = imagebytes;
 
-                 //   FileStream fs = new FileStream(fullpath, FileMode.Open);
-
-                 //   byte[] imagebytes = new byte[fs.Length];
-
-              //      BinaryReader br = new BinaryReader(fs);
-
-               //     imagebytes = br.ReadBytes(Convert.ToInt32(fs.Length));
-                    
-                    //打开数据库
-                    byte[] imagebytes = ImageToStream(fullpath);
-                    sql = "insert into [album] values ('" + addacode + "','" + addaname + "','" + addtime + "',@cover)";
-                    cmd = new SqlCommand(sql, conn);
-                    cmd.Parameters.Add("cover", SqlDbType.Image);
-
-                    cmd.Parameters["cover"].Value = imagebytes;
-
-                    cmd.ExecuteNonQuery();
-                    MemoryStream ms = new MemoryStream(imagebytes);
-
-                    Bitmap bmpt = new Bitmap(ms);
-
-                    pictureBox1.Image = bmpt;
-
-
-                }
+                cmd.ExecuteNonQuery();
 
 
 
@@ -392,7 +376,38 @@ namespace touhou_music
         {
         }
 
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+
+            openFileDialog1.Filter = "*jpg|*.JPG|*.gif|*.GIF|*.bmp|*.BMP";
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                fullpath = openFileDialog1.FileName;//文件路径
+
+                //   FileStream fs = new FileStream(fullpath, FileMode.Open);
+
+                //   byte[] imagebytes = new byte[fs.Length];
+
+                //      BinaryReader br = new BinaryReader(fs);
+
+                //     imagebytes = br.ReadBytes(Convert.ToInt32(fs.Length));
+
+                //打开数据库
+                imagebytes = ImageToStream(fullpath);
+              
+                MemoryStream ms = new MemoryStream(imagebytes);
+
+                Bitmap bmpt = new Bitmap(ms);
+
+                pictureBox1.Image = bmpt;
 
 
+            }
+        }
+
+
+        
     }
 }

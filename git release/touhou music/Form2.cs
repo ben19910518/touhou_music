@@ -124,21 +124,21 @@ namespace touhou_music
 
             sqlstr = "select [group].gname as 社团名,album.aname as 专辑名,[time] as 首发展会,track as 音轨号,sname as 曲目名,arranger as 编曲,lyric as 作词,vocal as 歌手,style as 风格,origin as 原曲,adduser as 添加人员 from album,gas,[group],ori,song where gas.gcode=[group].gcode and gas.acode=album.acode and gas.scode=song.scode and song.oricode=ori.oricode";
             if (tempgname != string.Empty)
-                sqlstr = sqlstr + " and [group].gname='" + tempgname + "'";
+                sqlstr = sqlstr + " and [group].gname like '%" + tempgname + "%'";
             if (tempaname != string.Empty)
-                sqlstr = sqlstr + " and album.aname='" + tempaname + "'";
+                sqlstr = sqlstr + " and album.aname like '%" + tempaname + "%'";
             if (tempsname != string.Empty)
-                sqlstr = sqlstr + " and song.sname='" + tempsname + "'";
+                sqlstr = sqlstr + " and song.sname like '%" + tempsname + "%'";
             if (temparranger != string.Empty)
-                sqlstr = sqlstr + " and arranger='" + temparranger + "'";
+                sqlstr = sqlstr + " and arranger like '%" + temparranger + "%'";
             if (templyric != string.Empty)
-                sqlstr = sqlstr + " and lyric='" + templyric + "'";
+                sqlstr = sqlstr + " and lyric like '%" + templyric + "%'";
             if (tempvocal != string.Empty)
-                sqlstr = sqlstr + " and vocal='" + tempvocal + "'";
+                sqlstr = sqlstr + " and vocal like '%" + tempvocal + "%'";
             if (tempstyle != string.Empty)
-                sqlstr = sqlstr + " and style='" + tempstyle + "'";
+                sqlstr = sqlstr + " and style like '%" + tempstyle + "%'";
             if (temptime != string.Empty)
-                sqlstr = sqlstr + " and time='" + temptime + "'";
+                sqlstr = sqlstr + " and time like '%" + temptime + "%'";
             if (temporigin != string.Empty)
                 sqlstr = sqlstr + " and origin='" + temporigin + "'";
 
@@ -397,6 +397,13 @@ namespace touhou_music
             closeSQL();
             if (imagebytes != null)
             {
+                if (imagebytes[0] == 0)
+                {
+                    pictureBox2.Image = touhou_music.Properties.Resources.x;
+                    return;
+                }
+                    
+
                 MemoryStream ms = new MemoryStream(imagebytes);
 
                 Bitmap bmpt = new Bitmap(ms);
