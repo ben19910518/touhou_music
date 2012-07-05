@@ -1,0 +1,365 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Huto" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\13\Huto.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Minamitu_nb" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\12\Minamitu_nb.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Wriggle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\08\Wriggle.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Chen" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\07\Chen.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Minoriko" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\10\Minoriko.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Letty" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\07\Letty.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Suika" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\075\Suika.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Parsee" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\11\Parsee.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Lunachild" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\other\Lunachild.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Rin_nb" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\11\Rin_nb.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Ran" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\07\Ran.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Kaguya" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\08\Kaguya.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Flandre" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\06\Flandre.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Patchouli" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\06\Patchouli.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Suwako" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\10\Suwako.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Nazrin_nb" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\12\Nazrin_nb.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Yuugi" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\Yuugi.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="not found" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\not found.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="广告条" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\广告条.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Mamizou" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\13\Mamizou.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Merry" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\other\Merry.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Kanako" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\10\Kanako.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Yosika" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\13\Yosika.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Iku" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\105\Iku.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Sikieiki" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\09\Sikieiki.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Udonge" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\08\Udonge.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Hatate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\Hatate.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Tenshi" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\105\Tenshi.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Cirno" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\06\Cirno.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Kourin" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\other\Kourin.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Nue_nb" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\Nue_nb.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Aya" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\09\Aya.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Mokou" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\08\Mokou.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Satori_nb" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\11\Satori_nb.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Yuuka" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\09\Yuuka.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Mystia" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\08\Mystia.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Yuyuko" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\07\Yuyuko.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Meiling" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\06\Meiling.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Kogasa_nb" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\12\Kogasa_nb.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Devil" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\other\Devil.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Sunnymilk" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\other\Sunnymilk.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Youmu" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\07\Youmu.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Yukari" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\07\Yukari.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Marisa" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\06\Marisa.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Nanashi" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\other\Nanashi.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Komachi" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\09\Komachi.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Yamame" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\11\Yamame.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Byakuren_nb" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\12\Byakuren_nb.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Ayamof" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\10\Ayamof.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Starsapphire" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\other\Starsapphire.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Sakuya" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\06\Sakuya.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Alice" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\07\Alice.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Tewi" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\08\Tewi.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Remilia" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\06\Remilia.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Toziko" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\13\Toziko.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Ichirin_nb" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\12\Ichirin_nb.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Akyu" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\other\Akyu.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Syou_nb" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\Syou_nb.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Miko" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\13\Miko.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Sizuha" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\10\Sizuha.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Momizi" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\10\Momizi.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Eirin" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\08\Eirin.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Fairy" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\other\Fairy.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Koishi_nb" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\11\Koishi_nb.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Utsuho_nb" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\11\Utsuho_nb.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Kisume" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\11\Kisume.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Rumia" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\06\Rumia.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Reisen2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\other\Reisen2.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Keine" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\08\Keine.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Lunasa" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\07\Lunasa.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Nitori" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\10\Nitori.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Hina" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\10\Hina.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Lilywhite" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\07\Lilywhite.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Renko" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\other\Renko.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Kyouko" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\13\Kyouko.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Sanae" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\10\Sanae.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Reimu" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\06\Reimu.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Keineex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\08\Keineex.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Medicine" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\09\Medicine.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Seiga" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\新建文件夹\13\Seiga.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="x" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\x.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+</root>
