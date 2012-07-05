@@ -214,7 +214,7 @@
             this.Name = "Form1";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "东方同人音乐管理系统 V.1.3.4  KCM ver. ";
+            this.Text = "东方同人音乐管理系统 V.1.4.0  KCM ver. ";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing_1);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -8,7 +8,7 @@ namespace touhou_music.datas
     class DataPool
     {
         public static string server = "58.221.49.107";
-      //  public static string server = ".";
+       //public static string server = ".";
     //    private static string database = "touhou music";
     //    private static string uid = "sa";
    //     private static string password = "";
@@ -17,6 +17,7 @@ namespace touhou_music.datas
         //10.2.10.5,1433
         public static string currentID = "";
         public static string currentMD5Password = "";
+        public static string currentAutho = "";
         public static Form1 Form1;
         public static Form3 Form3;
         //密码: 字母+数字 5到18位

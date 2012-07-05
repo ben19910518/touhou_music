@@ -64,6 +64,7 @@ namespace touhou_music
             string sql1 = "select autho from [user] where username = '" + DataPool.currentID + "'";
             cmd = new SqlCommand(sql1, conn);
             string autho = cmd.ExecuteScalar() as string;
+            DataPool.currentAutho = autho;
             closeSQL();
 
             if (autho == "3")

@@ -9,10 +9,13 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using touhou_music.datas;
 using System.Diagnostics;
+using System.IO;
 namespace touhou_music
 {
     public partial class Form12 : Form
     {
+        private byte[] imagebytes;
+        private string fullpath;
         private SqlConnection conn;
         private SqlCommand cmd;
         private string modacode;
@@ -43,6 +46,7 @@ namespace touhou_music
         private string modlyric2;
         private string modvocal2;
         private string modstyle2;
+        private string adduser;
         public Form12()
         {
             InitializeComponent();
@@ -82,7 +86,7 @@ namespace touhou_music
         private void button2_Click(object sender, EventArgs e)
         {
             string sql;
-
+           
       //      modacode2 = comboBox2.Text;
       //      modtrack2 = comboBox6.Text;
        //     modscode2 = modacode2 + modtrack2;
@@ -108,7 +112,7 @@ namespace touhou_music
             string sql;
             modaname2 = comboBox4.Text.Replace("'", "''");
             modtime2 = comboBox5.Text;
-            if (modaname2 != modaname)
+          /*  if (modaname2 != modaname)
             {
                 connectSQL();
                 sql = "update [album] set aname='" + modaname2 + "' where acode='" + modacode + "'";
@@ -126,8 +130,30 @@ namespace touhou_music
                 closeSQL();
                 MessageBox.Show("修改首发展会成功！", "消息");
             }
+            connectSQL();
+            sql = "update [album] set cover='@cover' where acode='" + modacode + "'";
+            cmd = new SqlCommand(sql, conn);
+            cmd.Parameters.Add("cover", SqlDbType.Image);
 
+            cmd.Parameters["cover"].Value = imagebytes;
+            cmd.ExecuteScalar();
+            closeSQL();
+            MessageBox.Show("修改专辑图片成功！", "消息");
+*/
+            connectSQL();
 
+            sql = "delete from [album] where acode='" + modacode + "'";
+            cmd = new SqlCommand(sql, conn);
+            cmd.ExecuteNonQuery();
+            sql = "insert into [album] values ('" + modacode + "','" +modaname2 + "','" + modtime2 + "',@cover)";
+            cmd = new SqlCommand(sql, conn);
+            cmd.Parameters.Add("cover", SqlDbType.Image);
+
+            cmd.Parameters["cover"].Value = imagebytes;
+
+            cmd.ExecuteNonQuery();
+            closeSQL();
+            MessageBox.Show("修改成功！", "消息");
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -219,7 +245,7 @@ namespace touhou_music
 
 
             modacode = comboBox2.Text;
-            modgcode = modacode.Substring(0,4);
+            modgcode = modacode.Substring(0, 4);
             connectSQL();
             DataSet ds = new DataSet();
 
@@ -275,7 +301,7 @@ namespace touhou_music
             modtime = comboBox5.Text;
             comboBox6.Items.Clear();
 
-            SqlDataAdapter da6 = new SqlDataAdapter("select distinct track from [song],gas where gas.scode=song.scode and acode='"+modacode+"'", conn);
+            SqlDataAdapter da6 = new SqlDataAdapter("select distinct track from [song],gas where gas.scode=song.scode and acode='" + modacode + "'", conn);
 
             da6.Fill(ds6);
             for (int i = 0; i < ds6.Tables[0].Rows.Count; i++)
@@ -285,14 +311,61 @@ namespace touhou_music
 
             comboBox6.SelectedIndex = 0;
 
-
-
-
-
-
             closeSQL();
 
 
+
+
+
+
+
+            
+
+            pictureBox1.Image = null;
+          //  byte[] imagebytes = null;
+
+            connectSQL();
+
+            SqlCommand com = new SqlCommand("select cover from album where acode='" + modacode + "'", conn);
+            //" + tempaname + "
+            SqlDataReader dr = com.ExecuteReader();
+
+            while (dr.Read())
+            {
+
+                imagebytes1 = (byte[])dr.GetValue(0);
+
+            }
+
+            dr.Close();
+
+            com.Clone();
+            closeSQL();
+            if (imagebytes1 != null)
+            {
+                if (imagebytes1[0] == 0)
+                {
+                    pictureBox1.Image = touhou_music.Properties.Resources.x;
+                    return;
+                }
+
+
+                MemoryStream ms = new MemoryStream(imagebytes1);
+
+                Bitmap bmpt = new Bitmap(ms);
+                //Image image = Image.FromStream(ms, true);
+                //dr.Close();
+                //closeSQL();
+                pictureBox1.Image = bmpt;
+
+
+
+            
+
+
+
+
+            }
         }
 
         private void comboBox6_SelectedIndexChanged(object sender, EventArgs e)
@@ -402,8 +475,52 @@ namespace touhou_music
 
                 modoricode = cmd.ExecuteScalar() as string;
                 closeSQL();
+
+
+
+
             }
             catch { MessageBox.Show("无此曲目", "提示"); closeSQL(); return; }
         }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+
+            openFileDialog1.Filter = "*jpg|*.JPG|*.gif|*.GIF|*.bmp|*.BMP";
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                fullpath = openFileDialog1.FileName;//文件路径
+
+                //   FileStream fs = new FileStream(fullpath, FileMode.Open);
+
+                //   byte[] imagebytes = new byte[fs.Length];
+
+                //      BinaryReader br = new BinaryReader(fs);
+
+                //     imagebytes = br.ReadBytes(Convert.ToInt32(fs.Length));
+
+                //打开数据库
+                imagebytes = ImageToStream(fullpath);
+
+                MemoryStream ms = new MemoryStream(imagebytes);
+
+                Bitmap bmpt = new Bitmap(ms);
+
+                pictureBox1.Image = bmpt;
+
+            }
+        }
+                  private byte[] ImageToStream(string fileName)
+        {
+            Bitmap image = new Bitmap(fileName);
+            MemoryStream stream = new MemoryStream();
+            image.Save(stream, System.Drawing.Imaging.ImageFormat.Bmp);
+            return stream.ToArray();
+        }
+
+                  public byte[] imagebytes1 { get; set; }
     }
 }

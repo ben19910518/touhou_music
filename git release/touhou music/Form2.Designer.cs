@@ -288,35 +288,36 @@
             this.修改ToolStripMenuItem,
             this.删除ToolStripMenuItem,
             this.添加原曲ToolStripMenuItem});
+            this.编辑数据ToolStripMenuItem.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.编辑数据ToolStripMenuItem.Name = "编辑数据ToolStripMenuItem";
-            this.编辑数据ToolStripMenuItem.Size = new System.Drawing.Size(68, 24);
+            this.编辑数据ToolStripMenuItem.Size = new System.Drawing.Size(77, 24);
             this.编辑数据ToolStripMenuItem.Text = "编辑数据";
             // 
             // 添加ToolStripMenuItem
             // 
             this.添加ToolStripMenuItem.Name = "添加ToolStripMenuItem";
-            this.添加ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.添加ToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
             this.添加ToolStripMenuItem.Text = "添加";
             this.添加ToolStripMenuItem.Click += new System.EventHandler(this.添加ToolStripMenuItem_Click);
             // 
             // 修改ToolStripMenuItem
             // 
             this.修改ToolStripMenuItem.Name = "修改ToolStripMenuItem";
-            this.修改ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.修改ToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
             this.修改ToolStripMenuItem.Text = "修改";
             this.修改ToolStripMenuItem.Click += new System.EventHandler(this.修改ToolStripMenuItem_Click);
             // 
             // 删除ToolStripMenuItem
             // 
             this.删除ToolStripMenuItem.Name = "删除ToolStripMenuItem";
-            this.删除ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.删除ToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
             this.删除ToolStripMenuItem.Text = "删除";
             this.删除ToolStripMenuItem.Click += new System.EventHandler(this.删除ToolStripMenuItem_Click);
             // 
             // 添加原曲ToolStripMenuItem
             // 
             this.添加原曲ToolStripMenuItem.Name = "添加原曲ToolStripMenuItem";
-            this.添加原曲ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.添加原曲ToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
             this.添加原曲ToolStripMenuItem.Text = "添加原曲";
             this.添加原曲ToolStripMenuItem.Click += new System.EventHandler(this.添加原曲ToolStripMenuItem_Click);
             // 
