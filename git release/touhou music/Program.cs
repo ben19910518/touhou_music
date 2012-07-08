@@ -15,6 +15,7 @@ namespace touhou_music
         public sqlAdapter(string connectCommand)
         {
             conn = new SqlConnection(connectCommand);
+            conn.Open();
         }
         ~sqlAdapter()
         {
@@ -22,43 +23,33 @@ namespace touhou_music
         }
         public void Dispose()
         {
+            conn.Close();
             conn.Dispose();
         }
         public System.Object ExecuteScalar(string command)
         {
-            conn.Open();
             if(command == null)
                 return null;
             cmd = new SqlCommand(command, this.conn);
-            System.Object tmp = cmd.ExecuteScalar();
-            cmd = null;
-            conn.Close();
-            return tmp;
+            return cmd.ExecuteScalar();
         }
-        public SqlDataReader ExecuteReader(string command)
+        public void getExecuteReader(out SqlDataReader ds,string command)
         {
-            conn.Open();
             cmd = new SqlCommand(command, this.conn);
-            SqlDataReader tmp = cmd.ExecuteReader();
+            ds= cmd.ExecuteReader();
             cmd = null;
-            conn.Close();
-            return tmp;
         }
         public void getDataSet(string cmd, out DataSet ds)
         {
-            conn.Open();
             ds = new DataSet();
             SqlDataAdapter da = new SqlDataAdapter(cmd, conn);
             da.Fill(ds);
-            conn.Close();
         }
         public void getDataSet(string cmd, out DataSet ds,string ex)
         {
-            conn.Open();
             ds = new DataSet();
             SqlDataAdapter da = new SqlDataAdapter(cmd, conn);
             da.Fill(ds,ex);
-            conn.Close();
         }
 
     }

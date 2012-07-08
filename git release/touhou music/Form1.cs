@@ -46,7 +46,8 @@ namespace touhou_music
 
             //flag = 1;
             checkBox1.Checked = true;
-
+            psHd = Dummy;
+            psCt = Dummy;
         }
 
         static public string Dummy(string str)

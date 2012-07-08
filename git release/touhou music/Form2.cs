@@ -15,8 +15,6 @@ namespace touhou_music
 {
     public partial class Form2 : Form
     {
-        private SqlConnection conn;
-        private SqlCommand cmd;
         private string tempgname;
         private string tempaname;
         private string tempsname;
@@ -44,18 +42,11 @@ namespace touhou_music
             using (sqlAdapter sqladp = new sqlAdapter(DataPool.conString))
             {
                 string sql = "select count(scode) from gas ";
-                cmd = new SqlCommand(sql, conn);
-                int ssum = Convert.ToInt16(cmd.ExecuteScalar());
-
+                int ssum = Convert.ToUInt16(sqladp.ExecuteScalar(sql));
                 toolStripStatusLabel1.Text = "目前歌曲数：" + ssum;
-
-
-
                 sql = "select count(username) from [user] ";
                 int peoplesum = Convert.ToUInt16(sqladp.ExecuteScalar(sql));
-
                 toolStripStatusLabel3.Text = "注册人数：" + peoplesum;
-
                 sql = "select autho from [user] where username = '" + DataPool.currentID + "'";
 
                 string autho = sqladp.ExecuteScalar(sql) as string;
@@ -377,7 +368,8 @@ namespace touhou_music
             using (sqlAdapter sqladp = new sqlAdapter(DataPool.conString))
             {
                 //" + tempaname + "
-                SqlDataReader dr = sqladp.ExecuteReader("select cover from album where aname='" + nowalbum.Replace("'", "''") + "'");
+                SqlDataReader dr;
+                sqladp.getExecuteReader(out dr,"select cover from album where aname='" + nowalbum.Replace("'", "''") + "'");
                 while (dr.Read())
                 {
 
