@@ -13,9 +13,6 @@
         /// <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
         protected override void Dispose(bool disposing)
         {
-            System.Diagnostics.Trace.Assert(conn == null, "SQL连接没有正常关闭", "请继续运行此程序，并将BUG报告给程序维护人员");
-            if (conn != null)
-                conn.Close();
             if (disposing && (components != null))
             {
                 components.Dispose();
@@ -76,7 +73,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 21);
             this.textBox1.TabIndex = 0;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox_TextChanged);
             // 
             // label1
             // 
@@ -105,7 +102,7 @@
             this.textBox2.PasswordChar = '●';
             this.textBox2.Size = new System.Drawing.Size(100, 21);
             this.textBox2.TabIndex = 1;
-            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            this.textBox2.TextChanged += new System.EventHandler(this.textBox_TextChanged);
             this.textBox2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox2_KeyPress_1);
             // 
             // label3

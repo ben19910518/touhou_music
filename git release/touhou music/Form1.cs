@@ -10,12 +10,10 @@ using System.Data.SqlClient;
 using touhou_music.datas;
 using System.Security.Cryptography;
 using System.Runtime.InteropServices;
+using System.Diagnostics;
 
 namespace touhou_music
 {
-
-
-
     public partial class Form1 : Form
     {
         [DllImport("Kernel32.dll")]
@@ -23,13 +21,14 @@ namespace touhou_music
         [DllImport("Kernel32.dll")]
         public static extern int GetPrivateProfileString(string strAppName,string strKeyName,string strDefault,StringBuilder sbReturnString,int nSize,string strFileName);
 
-        private int flag=0;
+        //private int flag = 0;
         private string userid;
         private string password;
-        private SqlConnection conn = null;
-        private SqlCommand cmd;
         private StringBuilder userid1;
         private StringBuilder password1;
+        private delegate string PassHandler(string str);
+        PassHandler psHd = Dummy;
+        PassHandler psCt = Dummy;
 
         public Form1()
         {  
@@ -39,18 +38,22 @@ namespace touhou_music
 
             InitializeComponent();
             DataPool.Form1 = this;
-        GetPrivateProfileString("user", "username","" ,userid1,256,".\\THMconfig.ini");
-        GetPrivateProfileString("user","password","" ,password1,256,".\\THMconfig.ini");
+            GetPrivateProfileString("user", "username","" ,userid1,256,".\\THMconfig.ini");
+            GetPrivateProfileString("user","password","" ,password1,256,".\\THMconfig.ini");
            
-            textBox1.Text = Convert.ToString( userid1);
+            textBox1.Text = Convert.ToString(userid1);
             textBox2.Text = Convert.ToString(password1);
 
-            flag = 1;
-
+            //flag = 1;
             checkBox1.Checked = true;
 
         }
-        public string MD5kamiro(string password)
+
+        static public string Dummy(string str)
+        {
+            return str;
+        }
+        static public string MD5kamiro(string password)
         {
             string pwd = "";
             // 加密后是一个字节类型的数组，这里要注意编码UTF8/Unicode等的选择　
@@ -65,8 +68,7 @@ namespace touhou_music
             }
             return pwd;
         }
-
-        private string MD5Create(string STR) //STR为待加密的string  
+        static private string MD5Create(string STR) //STR为待加密的string  
         {
             string pwd = "";
             //pwd为加密结果  
@@ -84,7 +86,6 @@ namespace touhou_music
         {
             userid = textBox1.Text;
             password = textBox2.Text;
-            
 
             if (userid == string.Empty)
             {
@@ -100,197 +101,103 @@ namespace touhou_music
                     return;
                 }
             }
-
-
-
-            if (flag == 1)
+            try
             {
-                try
+                using (sqlAdapter sqladp = new sqlAdapter(DataPool.conString))
                 {
-                    connectSQL();
-                    // connectkamiroSQL();
                     string sql = "select password from [user] where username = '" + userid + "'";
-                    cmd = new SqlCommand(sql, conn);
 
-                    string obj = cmd.ExecuteScalar() as string;
-                    //对数据库查询出的值进行判断
-                    if (obj == null)
+                    string obj = sqladp.ExecuteScalar(sql) as string;
+
+                    if (obj == null) 
+                        // user from kamiro website
                     {
-                        connectkamiroSQL();
-                        sql = "select password from [userTable] where userName = '" + userid + "'";
-                        cmd = new SqlCommand(sql, conn);
-
-                        string kamiropass = cmd.ExecuteScalar() as string;
-                        if (password == kamiropass)
+                        using (sqlAdapter sqlKamiro = new sqlAdapter(DataPool.conkamiro))
                         {
-
-                            //MessageBox.Show("登录成功", "提示");
-                            DataPool.currentID = userid;
-                            DataPool.currentMD5Password = obj;
-                            //this.Visible = false;
-                            MessageBox.Show("欢迎来自KCM的账号！", "消息");
-                            if (checkBox1.Checked == true)
+                            sql = "select password from [userTable] where userName = '" + userid + "'";
+                            string kamiropass = sqlKamiro.ExecuteScalar(sql) as string;
+                            if (psHd(password) == kamiropass)
                             {
-                                WritePrivateProfileString("user", "username", DataPool.currentID, ".\\THMconfig.ini");
-                                WritePrivateProfileString("user", "password", DataPool.currentMD5Password, ".\\THMconfig.ini");
-                            }
-                            else 
-                            {
-                                WritePrivateProfileString("user", "username", "", ".\\THMconfig.ini");
-                                WritePrivateProfileString("user", "password", "", ".\\THMconfig.ini");
-                            }
+                                DataPool.currentID = userid;
+                                DataPool.currentMD5Password = obj;
+                                //this.Visible = false;
+                                MessageBox.Show("欢迎来自KCM的账号！", "消息");
 
-                            this.Dispose();
+                                doRememberPasswd();
 
+                                this.Dispose();
 
-                        }
-                        else
-                            MessageBox.Show("密码错误", "提示");
-
-
-                        closeSQL();
-
-                    }
-                    else
-                    {
-                        if (password == obj)
-                        {
-
-                            //MessageBox.Show("登录成功", "提示");
-                            DataPool.currentID = userid;
-                            DataPool.currentMD5Password = obj;
-                            //this.Visible = false;
-                            if (checkBox1.Checked == true)
-                            {
-                                WritePrivateProfileString("user", "username", DataPool.currentID, ".\\THMconfig.ini");
-                                WritePrivateProfileString("user", "password", DataPool.currentMD5Password, ".\\THMconfig.ini");
                             }
                             else
-                            {
-                                WritePrivateProfileString("user", "username", " ", ".\\THMconfig.ini");
-                                WritePrivateProfileString("user", "password", " ", ".\\THMconfig.ini");
-                            }
-                            this.Dispose();
+                                MessageBox.Show("密码错误", "提示");
+                        }
+                    }
+                    else
+                        // user of this program
+                    {
+                        if (psCt(password) == obj)
+                        {
 
+                            //MessageBox.Show("登录成功", "提示");
+                            DataPool.currentID = userid;
+                            DataPool.currentMD5Password = obj;
+                            //this.Visible = false;
+
+                            doRememberPasswd();
+
+                            this.Dispose();
 
                         }
                         else
                             MessageBox.Show("密码错误", "提示");
                     }
-
-                    closeSQL();
                 }
-                catch { MessageBox.Show("连接失败！", "提示"); return; }
-
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("连接失败！", "提示");
+                Trace.Write(ex.StackTrace);
+                return;
+            }
+        }
 
+        //private void connectkamiroSQL()
+        //{
+        //    conn = new SqlConnection(DataPool.conkamiro);
 
+        //    conn.Open();
+        //}
+        //private void connectSQL()
+        //{
+        //    System.Diagnostics.Trace.Assert(conn == null, "SQL连接没有正常关闭","请继续运行此程序，并将BUG报告给程序维护人员");
+        //    if (conn != null)
+        //        conn.Close();
+        //    conn = new SqlConnection(DataPool.conString);
+        //    conn.Open();
+        //}
+
+        //private void closeSQL()
+        //{
+        //    System.Diagnostics.Debug.Assert(conn != null, "SQL连接没有正常打开", "Error in closeSQL()");
+        //    if (conn == null)
+        //        return;
+        //    conn.Close();
+        //    conn = null;
+        //}
+
+        public void doRememberPasswd()
+        {
+            if (checkBox1.Checked == true)
+            {
+                WritePrivateProfileString("user", "username", DataPool.currentID, ".\\THMconfig.ini");
+                WritePrivateProfileString("user", "password", DataPool.currentMD5Password, ".\\THMconfig.ini");
+            }
             else
             {
-
-
-                try
-                {
-                    connectSQL();
-                    // connectkamiroSQL();
-                    string sql = "select password from [user] where username = '" + userid + "'";
-                    cmd = new SqlCommand(sql, conn);
-
-                    string obj = cmd.ExecuteScalar() as string;
-                    //对数据库查询出的值进行判断
-                    if (obj == null)
-                    {
-                        connectkamiroSQL();
-                        sql = "select password from [userTable] where userName = '" + userid + "'";
-                        cmd = new SqlCommand(sql, conn);
-
-                        string kamiropass = cmd.ExecuteScalar() as string;
-                        if (MD5kamiro(password) == kamiropass)
-                        {
-
-                            //MessageBox.Show("登录成功", "提示");
-                            DataPool.currentID = userid;
-                            DataPool.currentMD5Password = obj;
-                            //this.Visible = false;
-                            MessageBox.Show("欢迎来自KCM的账号！", "消息");
-                            if (checkBox1.Checked == true)
-                            {
-                                WritePrivateProfileString("user", "username", DataPool.currentID, ".\\THMconfig.ini");
-                                WritePrivateProfileString("user", "password", DataPool.currentMD5Password, ".\\THMconfig.ini");
-                            }
-                            else
-                            {
-                                WritePrivateProfileString("user", "username", "", ".\\THMconfig.ini");
-                                WritePrivateProfileString("user", "password", "", ".\\THMconfig.ini");
-                            }
-                            this.Dispose();
-
-
-                        }
-                        else
-                            MessageBox.Show("密码错误", "提示");
-
-
-                        closeSQL();
-
-                    }
-                    else
-                    {
-                        if (MD5Create(password) == obj)
-                        {
-
-                            //MessageBox.Show("登录成功", "提示");
-                            DataPool.currentID = userid;
-                            DataPool.currentMD5Password = obj;
-                            //this.Visible = false;
-                            if (checkBox1.Checked == true)
-                            {
-                                WritePrivateProfileString("user", "username", DataPool.currentID, ".\\THMconfig.ini");
-                                WritePrivateProfileString("user", "password", DataPool.currentMD5Password, ".\\THMconfig.ini");
-                            }
-                            else
-                            {
-                                WritePrivateProfileString("user", "username", "", ".\\THMconfig.ini");
-                                WritePrivateProfileString("user", "password", "", ".\\THMconfig.ini");
-                            }
-
-                            this.Dispose();
-
-
-                        }
-                        else
-                            MessageBox.Show("密码错误", "提示");
-                    }
-
-                    closeSQL();
-                }
-                catch { MessageBox.Show("连接失败！", "提示"); return; }
+                WritePrivateProfileString("user", "username", "", ".\\THMconfig.ini");
+                WritePrivateProfileString("user", "password", "", ".\\THMconfig.ini");
             }
         }
-        private void connectkamiroSQL()
-        {
-            conn = new SqlConnection(DataPool.conkamiro);
-
-            conn.Open();
-        }
-        private void connectSQL()
-        {
-            System.Diagnostics.Trace.Assert(conn == null, "SQL连接没有正常关闭","请继续运行此程序，并将BUG报告给程序维护人员");
-            if (conn != null)
-                conn.Close();
-            conn = new SqlConnection(DataPool.conString);
-            conn.Open();
-        }
-
-        private void closeSQL()
-        {
-            System.Diagnostics.Debug.Assert(conn == null, "SQL连接没有正常打开", "Error in closeSQL()");
-            if (conn == null)
-                return;
-            conn.Close();
-            conn = null;
-        }
-
         private void Form1_FormClosing_1(object sender, FormClosingEventArgs e)
         {
             if (DataPool.currentID == string.Empty)
@@ -396,6 +303,7 @@ namespace touhou_music
 
         }
 */
+
         private void button3_Click(object sender, EventArgs e)
         {
             Form5 Form5 = new Form5();
@@ -428,121 +336,53 @@ namespace touhou_music
                 }
             }
 
-            if (flag == 1)
+            using (sqlAdapter sqladp = new sqlAdapter(DataPool.conString))
             {
-                connectSQL();
-
                 string sql = "select password from [user] where username = '" + userid + "'";
-                cmd = new SqlCommand(sql, conn);
+                object obj = sqladp.ExecuteScalar(sql);
 
-                object obj = cmd.ExecuteScalar();
-                //对数据库查询出的值进行判断
                 if (obj == null)
                 {
-                    closeSQL();
                     MessageBox.Show("用户名不存在!", "提示");
                     return;
                 }
                 else
                 {
-                    if (password == obj.ToString())
+                    if (psCt(password) == obj.ToString())
                     {
-
-                        //MessageBox.Show("登录成功", "提示");
                         DataPool.currentID = userid;
                         DataPool.currentMD5Password = obj.ToString();
                         //this.Visible = false;
-                        string sql1 = "select autho from [user] where username = '" + userid + "'";
-                        cmd = new SqlCommand(sql1, conn);
-                        string autho = cmd.ExecuteScalar() as string;
-                        closeSQL();
+                        sql = "select autho from [user] where username = '" + userid + "'";
+                        string autho = sqladp.ExecuteScalar(sql) as string;
 
                         if (autho == "0")
                         {
                             Form10 Form10 = new Form10();
                             Form10.ShowDialog();
-
                         }
                         else
                         {
-
                             MessageBox.Show("没有权限", "提示");
                             return;
-
                         }
                     }
                     else
                     {
                         MessageBox.Show("密码错误", "提示");
-                        closeSQL();
-                    }
-                }
-            }
-            else
-            {
-                connectSQL();
-
-                string sql = "select password from [user] where username = '" + userid + "'";
-                cmd = new SqlCommand(sql, conn);
-
-                object obj = cmd.ExecuteScalar();
-                //对数据库查询出的值进行判断
-                if (obj == null)
-                {
-                    closeSQL();
-                    MessageBox.Show("用户名不存在!", "提示");
-                    return;
-                }
-                else
-                {
-                    if (MD5Create(password) == obj.ToString())
-                    {
-
-                        //MessageBox.Show("登录成功", "提示");
-                        DataPool.currentID = userid;
-                        DataPool.currentMD5Password = obj.ToString();
-                        //this.Visible = false;
-                        string sql1 = "select autho from [user] where username = '" + userid + "'";
-                        cmd = new SqlCommand(sql1, conn);
-                        string autho = cmd.ExecuteScalar() as string;
-                        closeSQL();
-
-                        if (autho == "0")
-                        {
-                            Form10 Form10 = new Form10();
-                            Form10.ShowDialog();
-
-                        }
-                        else
-                        {
-
-                            MessageBox.Show("没有权限", "提示");
-                            return;
-
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("密码错误", "提示");
-                        closeSQL();
                     }
                 }
             }
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void textBox_TextChanged(object sender, EventArgs e)
         {
-            flag = 0;
+            psHd = MD5kamiro;
+            psCt = MD5Create;
         }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-            flag = 0;
-        }
-
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-        
+            return;
         }
     }
 }
