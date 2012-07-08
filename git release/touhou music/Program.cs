@@ -2,9 +2,30 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using System.Data.SqlClient;
+using touhou_music.datas;
 
 namespace touhou_music
 {
+    class sqlAdapter:IDisposable
+    {
+        private SqlConnection conn;
+        sqlAdapter(string connectCommand)
+        {
+            conn = new SqlConnection(connectCommand);
+            conn.Open();
+        }
+        ~sqlAdapter()
+        {
+            if(conn != null)
+                conn.Close();
+        }
+        void Dispose()
+        {
+            if (conn != null)
+                conn.Close();
+        }
+    }
     static class Program
     {
         

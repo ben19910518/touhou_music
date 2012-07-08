@@ -13,6 +13,9 @@
         /// <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
         protected override void Dispose(bool disposing)
         {
+            System.Diagnostics.Trace.Assert(conn == null, "SQL连接没有正常关闭", "请继续运行此程序，并将BUG报告给程序维护人员");
+            if (conn != null)
+                conn.Close();
             if (disposing && (components != null))
             {
                 components.Dispose();

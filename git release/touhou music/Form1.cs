@@ -26,7 +26,7 @@ namespace touhou_music
         private int flag=0;
         private string userid;
         private string password;
-        private SqlConnection conn;
+        private SqlConnection conn = null;
         private SqlCommand cmd;
         private StringBuilder userid1;
         private StringBuilder password1;
@@ -275,14 +275,20 @@ namespace touhou_music
         }
         private void connectSQL()
         {
+            System.Diagnostics.Trace.Assert(conn == null, "SQL连接没有正常关闭","请继续运行此程序，并将BUG报告给程序维护人员");
+            if (conn != null)
+                conn.Close();
             conn = new SqlConnection(DataPool.conString);
-
             conn.Open();
         }
 
         private void closeSQL()
         {
+            System.Diagnostics.Debug.Assert(conn == null, "SQL连接没有正常打开", "Error in closeSQL()");
+            if (conn == null)
+                return;
             conn.Close();
+            conn = null;
         }
 
         private void Form1_FormClosing_1(object sender, FormClosingEventArgs e)
