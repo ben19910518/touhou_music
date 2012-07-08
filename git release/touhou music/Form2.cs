@@ -32,9 +32,6 @@ namespace touhou_music
         {
             InitializeComponent();
 
- 
-            
-
         }
 
         private void Form2_Load(object sender, EventArgs e)
@@ -44,69 +41,65 @@ namespace touhou_music
 
 
 
-            connectSQL();
-
-            string sql = "select count(scode) from gas ";
-            cmd = new SqlCommand(sql, conn);
-            int ssum = Convert.ToInt16( cmd.ExecuteScalar());
-            
-            toolStripStatusLabel1.Text = "目前歌曲数：" + ssum;
-
-
-
-            sql = "select count(username) from [user] ";
-            cmd = new SqlCommand(sql, conn);
-            int peoplesum = Convert.ToInt16(cmd.ExecuteScalar());
-
-            toolStripStatusLabel3.Text = "注册人数：" + peoplesum;
-
-            
-            string sql1 = "select autho from [user] where username = '" + DataPool.currentID + "'";
-            cmd = new SqlCommand(sql1, conn);
-            string autho = cmd.ExecuteScalar() as string;
-            DataPool.currentAutho = autho;
-            closeSQL();
-
-            if (autho == "3")
+            using (sqlAdapter sqladp = new sqlAdapter(DataPool.conString))
             {
-                添加原曲ToolStripMenuItem.Enabled = false;
-                添加ToolStripMenuItem.Enabled = false;
-                删除ToolStripMenuItem.Enabled = false;
-                修改ToolStripMenuItem.Enabled = false;
-            }
-            else if (autho == "2")
-            {
-                删除ToolStripMenuItem.Enabled = false;
-                修改ToolStripMenuItem.Enabled = false;
-            }
-            connectSQL();
-            DataSet ds = new DataSet();
-            SqlDataAdapter da = new SqlDataAdapter("select origin from ori", conn);
-            closeSQL();
-            da.Fill(ds);
-            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
-            {
-                comboBox1.Items.Add(ds.Tables[0].Rows[i][0]);
-            }
+                string sql = "select count(scode) from gas ";
+                cmd = new SqlCommand(sql, conn);
+                int ssum = Convert.ToInt16(cmd.ExecuteScalar());
 
-            comboBox1.SelectedIndex = 0;
-            
+                toolStripStatusLabel1.Text = "目前歌曲数：" + ssum;
+
+
+
+                sql = "select count(username) from [user] ";
+                int peoplesum = Convert.ToUInt16(sqladp.ExecuteScalar(sql));
+
+                toolStripStatusLabel3.Text = "注册人数：" + peoplesum;
+
+                sql = "select autho from [user] where username = '" + DataPool.currentID + "'";
+
+                string autho = sqladp.ExecuteScalar(sql) as string;
+                DataPool.currentAutho = autho;
+
+                if (autho == "3")
+                {
+                    添加原曲ToolStripMenuItem.Enabled = false;
+                    添加ToolStripMenuItem.Enabled = false;
+                    删除ToolStripMenuItem.Enabled = false;
+                    修改ToolStripMenuItem.Enabled = false;
+                }
+                else if (autho == "2")
+                {
+                    删除ToolStripMenuItem.Enabled = false;
+                    修改ToolStripMenuItem.Enabled = false;
+                }
+
+                DataSet ds;
+                sqladp.getDataSet("SELECT origin FROM ori",out ds);
+
+                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                {
+                    comboBox1.Items.Add(ds.Tables[0].Rows[i][0]);
+                }
+
+                comboBox1.SelectedIndex = 0;
+            }
             
         //    clerkNameText.Text = "当前管理员 " + DataPool.currentID;
        //     statusStrip1.Items.Insert(1, new ToolStripSeparator());
         }
 
-        private void connectSQL()
-        {
-            conn = new SqlConnection(DataPool.conString);
+        //private void connectSQL()
+        //{
+        //    conn = new SqlConnection(DataPool.conString);
 
-            conn.Open();
-        }
+        //    conn.Open();
+        //}
 
-        private void closeSQL()
-        {
-            conn.Close();
-        }
+        //private void closeSQL()
+        //{
+        //    conn.Close();
+        //}
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -143,13 +136,15 @@ namespace touhou_music
             if (temporigin != string.Empty)
                 sqlstr = sqlstr + " and origin='" + temporigin + "'";
 
-           connectSQL();
-            DataSet ds1 = new DataSet();
-            SqlDataAdapter da1 = new SqlDataAdapter(sqlstr, conn);
-            closeSQL();
-            da1.Fill(ds1, "detail");
+            DataSet ds1;
+            using (sqlAdapter sqladp = new sqlAdapter(DataPool.conString))
+            {
+                sqladp.getDataSet(sqlstr, out ds1, "detail");
+            }
          //   Trace.WriteLine(ds.Tables[0].Rows.Count);
+
             dataGridView1.DataSource = ds1.Tables[0];
+
         //   for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
          //   {
               //  dataGridView1.
@@ -379,23 +374,19 @@ namespace touhou_music
             string nowalbum = dataGridView1.Rows[row].Cells[1].Value.ToString();
             byte[] imagebytes = null;
 
-            connectSQL();
-
-            SqlCommand com = new SqlCommand("select cover from album where aname='" + nowalbum.Replace("'", "''") + "'", conn);
-            //" + tempaname + "
-            SqlDataReader dr = com.ExecuteReader();
-
-            while (dr.Read())
+            using (sqlAdapter sqladp = new sqlAdapter(DataPool.conString))
             {
-             
-                imagebytes = (byte[])dr.GetValue(0);
+                //" + tempaname + "
+                SqlDataReader dr = sqladp.ExecuteReader("select cover from album where aname='" + nowalbum.Replace("'", "''") + "'");
+                while (dr.Read())
+                {
 
+                    imagebytes = (byte[])dr.GetValue(0);
+
+                }
+
+                dr.Close();
             }
-
-            dr.Close();
-
-            com.Clone();
-            closeSQL();
             if (imagebytes != null)
             {
                 if (imagebytes[0] == 0)
