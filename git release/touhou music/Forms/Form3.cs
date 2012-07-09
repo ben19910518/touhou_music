@@ -17,8 +17,6 @@ namespace touhou_music
         private string userid;
         private string password;
         private string password2;
-        private SqlConnection conn;
-        private SqlCommand cmd;
 
         private string MD5Create(string STR) //STR为待加密的string  
         {
@@ -68,13 +66,10 @@ namespace touhou_music
                 MessageBox.Show("请输入用户名", "提示");
                 return;
             }
-            for (int i = 0; i < userid.Length; i++)
+            if (userid.Contains("\'"))
             {
-                if (userid[i] == '\'')
-                {
-                    MessageBox.Show("用户名不存在!", "提示信息");
-                    return;
-                }
+                MessageBox.Show("非法用户名!", "警告");
+                return;
             }
             if (password == string.Empty || password2==string.Empty)
             {
@@ -88,61 +83,45 @@ namespace touhou_music
             }
             password = MD5Create(password);
             ////////////////////////////////////////////////////////////////
-            connectSQL();
-
-            string sql = "select username from [user] where username = '" + userid + "'";
-            cmd = new SqlCommand(sql, conn);
-
-            object obj = cmd.ExecuteScalar();
-            //对数据库查询出的值进行判断
-            if (obj != null)
+            using (sqlAdapter sqladp = new sqlAdapter(DataPool.conString))
             {
-                closeSQL();
-                MessageBox.Show("用户名已存在!", "提示信息");
-                return;
-            }
-            else
-            {
-                sql = "insert into [user] values ('" + userid + "','" + password + "','3 ','" + textBox5.Text + "','" + textBox6.Text + "')";
-                cmd = new SqlCommand(sql, conn);
-                cmd.ExecuteScalar();
-                MessageBox.Show("注册成功!", "提示信息");
-                this.Dispose();
-                return;
-                /*if (password == obj.ToString())
+                string sql = "select username from [user] where username = '" + userid + "'";
+                object obj = sqladp.ExecuteScalar(sql);
+                //对数据库查询出的值进行判断
+                if (obj != null)
                 {
-                
-                    //MessageBox.Show("登录成功", "提示");
-                    DataPool.currentID = userid;
-                    DataPool.currentMD5Password = obj.ToString();
-                    //this.Visible = false;
-                    this.Dispose();
-
+                    MessageBox.Show("用户名已存在!", "提示信息");
+                    return;
                 }
                 else
-                    MessageBox.Show("密码错误", "提示");
+                {
+                    sql = "insert into [user] values ('" + userid + "','" + password + "','3 ','" + textBox5.Text + "','" + textBox6.Text + "')";
+                    sqladp.ExecuteScalar(sql);
+                    MessageBox.Show("注册成功!", "提示信息");
+                    this.Dispose();
+                    return;
+                    /*if (password == obj.ToString())
+                    {
+                
+                        //MessageBox.Show("登录成功", "提示");
+                        DataPool.currentID = userid;
+                        DataPool.currentMD5Password = obj.ToString();
+                        //this.Visible = false;
+                        this.Dispose();
+
+                    }
+                    else
+                        MessageBox.Show("密码错误", "提示");
                   
-                 */
+                     */
+                }
+
             }
-            
-            closeSQL();
             ////////////////////////////////////////////////////////////////////
 
 
 
         }
-        private void connectSQL()
-        {
-            conn = new SqlConnection(DataPool.conString);
-
-            conn.Open();
-        }
-
-        private void closeSQL()
-        {
-            conn.Close();
-        }
-
 
         private void textBox1_MouseMove(object sender, MouseEventArgs e)
         {

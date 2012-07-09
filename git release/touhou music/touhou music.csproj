@@ -83,121 +83,121 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="datas\DataPool.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="Forms\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
+    <Compile Include="Forms\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form10.cs">
+    <Compile Include="Forms\Form10.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form10.Designer.cs">
+    <Compile Include="Forms\Form10.Designer.cs">
       <DependentUpon>Form10.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form11.cs">
+    <Compile Include="Forms\Form11.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form11.Designer.cs">
+    <Compile Include="Forms\Form11.Designer.cs">
       <DependentUpon>Form11.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form12.cs">
+    <Compile Include="Forms\Form12.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form12.Designer.cs">
+    <Compile Include="Forms\Form12.Designer.cs">
       <DependentUpon>Form12.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form2.cs">
+    <Compile Include="Forms\Form2.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form2.Designer.cs">
+    <Compile Include="Forms\Form2.Designer.cs">
       <DependentUpon>Form2.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form3.cs">
+    <Compile Include="Forms\Form3.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form3.Designer.cs">
+    <Compile Include="Forms\Form3.Designer.cs">
       <DependentUpon>Form3.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form4.cs">
+    <Compile Include="Forms\Form4.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form4.Designer.cs">
+    <Compile Include="Forms\Form4.Designer.cs">
       <DependentUpon>Form4.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form5.cs">
+    <Compile Include="Forms\Form5.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form5.Designer.cs">
+    <Compile Include="Forms\Form5.Designer.cs">
       <DependentUpon>Form5.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form6.cs">
+    <Compile Include="Forms\Form6.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form6.Designer.cs">
+    <Compile Include="Forms\Form6.Designer.cs">
       <DependentUpon>Form6.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form7.cs">
+    <Compile Include="Forms\Form7.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form7.Designer.cs">
+    <Compile Include="Forms\Form7.Designer.cs">
       <DependentUpon>Form7.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form8.cs">
+    <Compile Include="Forms\Form8.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form8.Designer.cs">
+    <Compile Include="Forms\Form8.Designer.cs">
       <DependentUpon>Form8.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form9.cs">
+    <Compile Include="Forms\Form9.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form9.Designer.cs">
+    <Compile Include="Forms\Form9.Designer.cs">
       <DependentUpon>Form9.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="sqlAdapter.cs" />
     <Compile Include="touhou_musicDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>touhou_musicDataSet.xsd</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Form1.resx">
+    <EmbeddedResource Include="Forms\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form10.resx">
+    <EmbeddedResource Include="Forms\Form10.resx">
       <DependentUpon>Form10.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form11.resx">
+    <EmbeddedResource Include="Forms\Form11.resx">
       <DependentUpon>Form11.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form12.resx">
+    <EmbeddedResource Include="Forms\Form12.resx">
       <DependentUpon>Form12.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form2.resx">
+    <EmbeddedResource Include="Forms\Form2.resx">
       <DependentUpon>Form2.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form3.resx">
+    <EmbeddedResource Include="Forms\Form3.resx">
       <DependentUpon>Form3.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form4.resx">
+    <EmbeddedResource Include="Forms\Form4.resx">
       <DependentUpon>Form4.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form5.resx">
+    <EmbeddedResource Include="Forms\Form5.resx">
       <DependentUpon>Form5.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form6.resx">
+    <EmbeddedResource Include="Forms\Form6.resx">
       <DependentUpon>Form6.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form7.resx">
+    <EmbeddedResource Include="Forms\Form7.resx">
       <DependentUpon>Form7.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form8.resx">
+    <EmbeddedResource Include="Forms\Form8.resx">
       <DependentUpon>Form8.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form9.resx">
+    <EmbeddedResource Include="Forms\Form9.resx">
       <DependentUpon>Form9.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -210,7 +210,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

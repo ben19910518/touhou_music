@@ -93,15 +93,12 @@ namespace touhou_music
                 MessageBox.Show("请输入用户名", "提示");
                 return;
             }
-
-            for (int i = 0; i < userid.Length; i++)
+            if(userid.Contains("\'"))
             {
-                if (userid[i] == '\'')
-                {
-                    MessageBox.Show("用户名不存在!", "提示");
-                    return;
-                }
+                MessageBox.Show("用户名不存在!", "提示");
+                return;
             }
+
             try
             {
                 using (sqlAdapter sqladp = new sqlAdapter(DataPool.conString))

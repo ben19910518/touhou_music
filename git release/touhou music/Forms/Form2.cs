@@ -178,11 +178,10 @@ namespace touhou_music
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
            // if (comboBox1.Text == "少女綺想曲 ～ Dream Battle")
-           //     pictureBox1.Image = touhou_music.Properties.Resources.reimu;
+            //     pictureBox1.Image = touhou_music.Properties.Resources.reimu;
 
-           
-
-            switch(comboBox1.Text)
+            #region Select Picture
+            switch (comboBox1.Text)
             {
                 case "少女綺想曲 ～ Dream Battle": pictureBox1.Image = touhou_music.Properties.Resources.Reimu; break;
                 case "天狗の手帖 ～ Mysterious Note": pictureBox1.Image = touhou_music.Properties.Resources.Aya; break;
@@ -338,7 +337,7 @@ namespace touhou_music
 
                 default: pictureBox1.Image = touhou_music.Properties.Resources.not_found; break;
             }
-
+            #endregion
         }
 
         private void 退出ToolStripMenuItem_Click(object sender, EventArgs e)
