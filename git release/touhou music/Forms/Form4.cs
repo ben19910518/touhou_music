@@ -17,26 +17,20 @@ namespace touhou_music
     {
         private byte[] imagebytes;
         private string fullpath;
-        private SqlConnection conn;
-        private SqlCommand cmd;
-        private string            addacode;
-        private string     addaname;
-          private string   addtime;
-
-      private string       addgcode ;
-     private string        addscode ;
-
-      private string       addgname ;
-
-      private string       addoricode  ;
-     private string        addorigin ;
-
-      private string       addsname ;
-       private string      addtrack ;
-     private string        addarranger;
-       private string      addlyric ;
-      private string       addvocal;
-      private string       addstyle;
+        private string addacode;
+        private string addaname;
+        private string addtime;
+        private string addgcode;
+        private string addscode;
+        private string addgname;
+        private string addoricode;
+        private string addorigin;
+        private string addsname;
+        private string addtrack;
+        private string addarranger;
+        private string addlyric;
+        private string addvocal;
+        private string addstyle;
 
         public Form4()
         {
@@ -58,156 +52,134 @@ namespace touhou_music
             imagebytes = new byte[1];
             imagebytes[0] = 0;
 
-            connectSQL();
-            DataSet ds = new DataSet();
-            DataSet ds2 = new DataSet();
-            DataSet ds3 = new DataSet();
-            DataSet ds4 = new DataSet();
-            DataSet ds5 = new DataSet();
-            DataSet ds6 = new DataSet();
-            DataSet ds7 = new DataSet();
-            DataSet ds8 = new DataSet();
-            DataSet ds9 = new DataSet();
-            DataSet ds10 = new DataSet();
-            DataSet ds11 = new DataSet();
-            DataSet ds12 = new DataSet();
-
-
-
-            SqlDataAdapter da2 = new SqlDataAdapter("select distinct acode from [album]", conn);
-
-            da2.Fill(ds2);
-            for (int i = 0; i < ds2.Tables[0].Rows.Count; i++)
+            DataSet ds;
+            DataSet ds2;
+            DataSet ds3;
+            DataSet ds4;
+            DataSet ds5;
+            DataSet ds6;
+            DataSet ds7;
+            DataSet ds8;
+            DataSet ds9;
+            DataSet ds10;
+            DataSet ds11;
+            DataSet ds12;
+            using (sqlAdapter sqladp = new sqlAdapter(DataPool.conString))
             {
-                comboBox2.Items.Add(ds2.Tables[0].Rows[i][0]);
+                SqlDataAdapter da2 = new SqlDataAdapter("select distinct acode from [album]", conn);
+
+                da2.Fill(ds2);
+                foreach (DataColumnCollection cols in ds2.Tables[0].Columns)
+                {
+                    comboBox2.Items.Add(cols.ToString());
+                }
+                comboBox2.SelectedIndex = 0;
+                
+                SqlDataAdapter da3 = new SqlDataAdapter("select distinct gname from [group]", conn);
+
+                da3.Fill(ds3);
+                for (int i = 0; i < ds3.Tables[0].Rows.Count; i++)
+                {
+                    comboBox3.Items.Add(ds3.Tables[0].Rows[i][0]);
+                }
+
+                comboBox3.SelectedIndex = 0;
+
+                SqlDataAdapter da4 = new SqlDataAdapter("select distinct aname from [album]", conn);
+
+                da4.Fill(ds4);
+                for (int i = 0; i < ds4.Tables[0].Rows.Count; i++)
+                {
+                    comboBox4.Items.Add(ds4.Tables[0].Rows[i][0]);
+                }
+
+                comboBox4.SelectedIndex = 0;
+
+                SqlDataAdapter da5 = new SqlDataAdapter("select distinct [time] from [album]", conn);
+
+                da5.Fill(ds5);
+                for (int i = 0; i < ds5.Tables[0].Rows.Count; i++)
+                {
+                    comboBox5.Items.Add(ds5.Tables[0].Rows[i][0]);
+                }
+
+                comboBox5.SelectedIndex = 0;
+
+                SqlDataAdapter da6 = new SqlDataAdapter("select distinct track from [song]", conn);
+
+                da6.Fill(ds6);
+                for (int i = 0; i < ds6.Tables[0].Rows.Count; i++)
+                {
+                    comboBox6.Items.Add(ds6.Tables[0].Rows[i][0]);
+                }
+
+                comboBox6.SelectedIndex = 0;
+
+                SqlDataAdapter da7 = new SqlDataAdapter("select distinct lyric from [song]", conn);
+
+                da7.Fill(ds7);
+                for (int i = 0; i < ds7.Tables[0].Rows.Count; i++)
+                {
+                    comboBox7.Items.Add(ds7.Tables[0].Rows[i][0]);
+                }
+
+                comboBox7.SelectedIndex = 0;
+
+                SqlDataAdapter da8 = new SqlDataAdapter("select distinct sname from [song]", conn);
+
+                da8.Fill(ds8);
+                for (int i = 0; i < ds8.Tables[0].Rows.Count; i++)
+                {
+                    comboBox8.Items.Add(ds8.Tables[0].Rows[i][0]);
+                }
+
+                comboBox8.SelectedIndex = 0;
+
+                SqlDataAdapter da9 = new SqlDataAdapter("select distinct arranger from [song]", conn);
+
+                da9.Fill(ds9);
+                for (int i = 0; i < ds9.Tables[0].Rows.Count; i++)
+                {
+                    comboBox9.Items.Add(ds9.Tables[0].Rows[i][0]);
+                }
+
+                comboBox9.SelectedIndex = 0;
+
+                SqlDataAdapter da10 = new SqlDataAdapter("select distinct style from [song]", conn);
+
+                da10.Fill(ds10);
+                for (int i = 0; i < ds10.Tables[0].Rows.Count; i++)
+                {
+                    comboBox10.Items.Add(ds10.Tables[0].Rows[i][0]);
+                }
+
+                comboBox10.SelectedIndex = 0;
+
+                SqlDataAdapter da11 = new SqlDataAdapter("select distinct vocal from [song]", conn);
+
+                da11.Fill(ds11);
+                for (int i = 0; i < ds11.Tables[0].Rows.Count; i++)
+                {
+                    comboBox11.Items.Add(ds11.Tables[0].Rows[i][0]);
+                }
+
+                comboBox11.SelectedIndex = 0;
+
+                SqlDataAdapter da12 = new SqlDataAdapter("select distinct origin from [ori]", conn);
+
+                da12.Fill(ds12);
+                for (int i = 0; i < ds12.Tables[0].Rows.Count; i++)
+                {
+                    comboBox12.Items.Add(ds12.Tables[0].Rows[i][0]);
+                }
+
+                comboBox12.SelectedIndex = 0;
             }
-
-            comboBox2.SelectedIndex = 0;
-
-            SqlDataAdapter da3 = new SqlDataAdapter("select distinct gname from [group]", conn);
-
-            da3.Fill(ds3);
-            for (int i = 0; i < ds3.Tables[0].Rows.Count; i++)
-            {
-                comboBox3.Items.Add(ds3.Tables[0].Rows[i][0]);
-            }
-
-            comboBox3.SelectedIndex = 0;
-
-            SqlDataAdapter da4 = new SqlDataAdapter("select distinct aname from [album]", conn);
-
-            da4.Fill(ds4);
-            for (int i = 0; i < ds4.Tables[0].Rows.Count; i++)
-            {
-                comboBox4.Items.Add(ds4.Tables[0].Rows[i][0]);
-            }
-
-            comboBox4.SelectedIndex = 0;
-
-            SqlDataAdapter da5 = new SqlDataAdapter("select distinct [time] from [album]", conn);
-
-            da5.Fill(ds5);
-            for (int i = 0; i < ds5.Tables[0].Rows.Count; i++)
-            {
-                comboBox5.Items.Add(ds5.Tables[0].Rows[i][0]);
-            }
-
-            comboBox5.SelectedIndex = 0;
-
-            SqlDataAdapter da6 = new SqlDataAdapter("select distinct track from [song]", conn);
-
-            da6.Fill(ds6);
-            for (int i = 0; i < ds6.Tables[0].Rows.Count; i++)
-            {
-                comboBox6.Items.Add(ds6.Tables[0].Rows[i][0]);
-            }
-
-            comboBox6.SelectedIndex = 0;
-
-            SqlDataAdapter da7 = new SqlDataAdapter("select distinct lyric from [song]", conn);
-
-            da7.Fill(ds7);
-            for (int i = 0; i < ds7.Tables[0].Rows.Count; i++)
-            {
-                comboBox7.Items.Add(ds7.Tables[0].Rows[i][0]);
-            }
-
-            comboBox7.SelectedIndex = 0;
-
-            SqlDataAdapter da8 = new SqlDataAdapter("select distinct sname from [song]", conn);
-
-            da8.Fill(ds8);
-            for (int i = 0; i < ds8.Tables[0].Rows.Count; i++)
-            {
-                comboBox8.Items.Add(ds8.Tables[0].Rows[i][0]);
-            }
-
-            comboBox8.SelectedIndex = 0;
-
-            SqlDataAdapter da9 = new SqlDataAdapter("select distinct arranger from [song]", conn);
-
-            da9.Fill(ds9);
-            for (int i = 0; i < ds9.Tables[0].Rows.Count; i++)
-            {
-                comboBox9.Items.Add(ds9.Tables[0].Rows[i][0]);
-            }
-
-            comboBox9.SelectedIndex = 0;
-
-            SqlDataAdapter da10 = new SqlDataAdapter("select distinct style from [song]", conn);
-
-            da10.Fill(ds10);
-            for (int i = 0; i < ds10.Tables[0].Rows.Count; i++)
-            {
-                comboBox10.Items.Add(ds10.Tables[0].Rows[i][0]);
-            }
-
-            comboBox10.SelectedIndex = 0;
-
-            SqlDataAdapter da11 = new SqlDataAdapter("select distinct vocal from [song]", conn);
-
-            da11.Fill(ds11);
-            for (int i = 0; i < ds11.Tables[0].Rows.Count; i++)
-            {
-                comboBox11.Items.Add(ds11.Tables[0].Rows[i][0]);
-            }
-
-            comboBox11.SelectedIndex = 0;
-
-            SqlDataAdapter da12 = new SqlDataAdapter("select distinct origin from [ori]", conn);
-
-            da12.Fill(ds12);
-            for (int i = 0; i < ds12.Tables[0].Rows.Count; i++)
-            {
-                comboBox12.Items.Add(ds12.Tables[0].Rows[i][0]);
-            }
-
-            comboBox12.SelectedIndex = 0;
-            
-            
-            
-            
-            
-            
-            
-            closeSQL();
         }
 
         private byte[] ImageToStream(Image image)
         {
             throw new NotImplementedException();
-        }
-
-        private void connectSQL()
-        {
-            conn = new SqlConnection(DataPool.conString);
-
-            conn.Open();
-        }
-
-        private void closeSQL()
-        {
-            conn.Close();
         }
 
         private void button1_Click(object sender, EventArgs e)
