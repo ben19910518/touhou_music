@@ -7,7 +7,7 @@ namespace touhou_music.datas
 {   
     class DataPool
     {
-        public static string server = "58.221.49.107";
+        public static string server = "58.221.49.107";//"127.0.0.1"; //
        //public static string server = ".";
     //    private static string database = "touhou music";
     //    private static string uid = "sa";

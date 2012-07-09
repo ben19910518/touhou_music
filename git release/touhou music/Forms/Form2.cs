@@ -15,8 +15,6 @@ namespace touhou_music
 {
     public partial class Form2 : Form
     {
-        private SqlConnection conn;
-        private SqlCommand cmd;
         private string tempgname;
         private string tempaname;
         private string tempsname;
@@ -44,18 +42,11 @@ namespace touhou_music
             using (sqlAdapter sqladp = new sqlAdapter(DataPool.conString))
             {
                 string sql = "select count(scode) from gas ";
-                cmd = new SqlCommand(sql, conn);
-                int ssum = Convert.ToInt16(cmd.ExecuteScalar());
-
+                int ssum = Convert.ToUInt16(sqladp.ExecuteScalar(sql));
                 toolStripStatusLabel1.Text = "目前歌曲数：" + ssum;
-
-
-
                 sql = "select count(username) from [user] ";
                 int peoplesum = Convert.ToUInt16(sqladp.ExecuteScalar(sql));
-
                 toolStripStatusLabel3.Text = "注册人数：" + peoplesum;
-
                 sql = "select autho from [user] where username = '" + DataPool.currentID + "'";
 
                 string autho = sqladp.ExecuteScalar(sql) as string;
@@ -187,11 +178,10 @@ namespace touhou_music
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
            // if (comboBox1.Text == "少女綺想曲 ～ Dream Battle")
-           //     pictureBox1.Image = touhou_music.Properties.Resources.reimu;
+            //     pictureBox1.Image = touhou_music.Properties.Resources.reimu;
 
-           
-
-            switch(comboBox1.Text)
+            #region Select Picture
+            switch (comboBox1.Text)
             {
                 case "少女綺想曲 ～ Dream Battle": pictureBox1.Image = touhou_music.Properties.Resources.Reimu; break;
                 case "天狗の手帖 ～ Mysterious Note": pictureBox1.Image = touhou_music.Properties.Resources.Aya; break;
@@ -347,7 +337,7 @@ namespace touhou_music
 
                 default: pictureBox1.Image = touhou_music.Properties.Resources.not_found; break;
             }
-
+            #endregion
         }
 
         private void 退出ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -377,7 +367,8 @@ namespace touhou_music
             using (sqlAdapter sqladp = new sqlAdapter(DataPool.conString))
             {
                 //" + tempaname + "
-                SqlDataReader dr = sqladp.ExecuteReader("select cover from album where aname='" + nowalbum.Replace("'", "''") + "'");
+                SqlDataReader dr;
+                sqladp.getExecuteReader(out dr,"select cover from album where aname='" + nowalbum.Replace("'", "''") + "'");
                 while (dr.Read())
                 {
 
