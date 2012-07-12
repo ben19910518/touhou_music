@@ -24,8 +24,8 @@ namespace touhou_music
         //private int flag = 0;
         private string userid;
         private string password;
-        private StringBuilder userid1;
-        private StringBuilder password1;
+        //private StringBuilder userid1;
+        //private StringBuilder password1;
         private delegate string PassHandler(string str);
         PassHandler psHd = Dummy;
         PassHandler psCt = Dummy;

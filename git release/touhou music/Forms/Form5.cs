@@ -15,7 +15,7 @@ namespace touhou_music
     public partial class Form5 : Form
     {
         private SqlConnection conn;
-        private SqlCommand cmd;
+        //private SqlCommand cmd;
 
         public Form5()
         {

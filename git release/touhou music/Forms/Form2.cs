@@ -37,7 +37,10 @@ namespace touhou_music
             Form1 Form1 = new Form1();
             Form1.ShowDialog();
 
-
+            if (!Form1.IsDisposed)
+                return;
+            //if (DataPool.currentID == "")
+            //    return;
 
             using (sqlAdapter sqladp = new sqlAdapter(DataPool.conString))
             {

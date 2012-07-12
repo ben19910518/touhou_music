@@ -65,9 +65,8 @@ namespace touhou_music
             //DataSet ds11;
             //DataSet ds12;
 
-            DataSet ds = new DataSet();
-            ds.Tables.Clear();
             List<ComboBox> CB = new List<ComboBox>(11);
+            DataTable[] tp;
             CB.Add(comboBox2);
             CB.Add(comboBox3);
             CB.Add(comboBox4);
@@ -83,28 +82,27 @@ namespace touhou_music
             {
                 try
                 {
-                    DataTable[] tp = sqladp.getDataTables("select distinct acode from [album]",
+                     tp = sqladp.getDataTables("select distinct acode from [album]",
                         "select distinct gname from [group]", "select distinct aname from [album]",
                         "select distinct [time] from [album]", "select distinct track from [song]",
                         "select distinct lyric from [song]", "select distinct sname from [song]",
                         "select distinct arranger from [song]", "select distinct style from [song]",
                         "select distinct vocal from [song]", "select distinct origin from [ori]");
-                    foreach (DataTable dt in tp)
-                    {
-                        ds.Tables.Add(dt);
-                    }
-                }
-                catch (System.Exception ex)
-                {
-                    System.Diagnostics.Debug.Write(ex.Message);
-                }
-            }
-            for (int i = 0; i < ds.Tables.Count; i++)
-            {
-                try
-                {
-                    CB.ElementAt(i).Items.AddRange(ds.Tables[i].Select().ToArray());
-                    CB.ElementAt(i).SelectedIndex = 0;
+                     for (int i = 0; i < tp.Length; i++)
+                     {
+                         try
+                         {
+                             for (int j = 0; j < tp[i].Rows.Count; j++)
+                             {
+                                 CB[i].Items.Add(tp[i].Rows[j][0]);
+                             }
+                             CB.ElementAt(i).SelectedIndex = 0;
+                         }
+                         catch (System.Exception ex)
+                         {
+                             System.Diagnostics.Debug.Write(ex.Message);
+                         }
+                     }
                 }
                 catch (System.Exception ex)
                 {

@@ -22,14 +22,14 @@ namespace touhou_music
         private string modgcode;
         private string modscode;
         private string modgname;
-        private string modoricode;
-        private string modorigin;
-        private string modsname;
+        //private string modoricode;
+        //private string modorigin;
+        //private string modsname;
         private string modtrack;
-        private string modarranger;
-        private string modlyric;
-        private string modvocal;
-        private string modstyle;
+        //private string modarranger;
+        //private string modlyric;
+        //private string modvocal;
+        //private string modstyle;
 
         public Form7()
         {
