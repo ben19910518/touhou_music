@@ -26,6 +26,10 @@ namespace touhou_music
             conn.Close();
             conn.Dispose();
         }
+        public void setCommand(string command)
+        {
+            this.cmd = new SqlCommand(command, this.conn);
+        }
         public System.Object ExecuteScalar(string command)
         {
             if (command == null)
@@ -50,6 +54,35 @@ namespace touhou_music
             ds = new DataSet();
             SqlDataAdapter da = new SqlDataAdapter(cmd, conn);
             da.Fill(ds, ex);
+        }
+        public void fillDataTable(string cmd, ref DataTable dt)
+        {
+            SqlDataAdapter da = new SqlDataAdapter(cmd, conn);
+            da.Fill(dt);
+        }
+        public DataTable[] getDataTables(params string[] cmd)
+        {
+            List<DataTable> dt = new List<DataTable>();
+            SqlDataAdapter da;
+            DataTable tp = new DataTable();
+            foreach(string co in cmd)
+            {
+                da = new SqlDataAdapter(co, conn);
+                da.Fill(tp);
+                tp.Clear();
+                dt.Add(tp);
+            }
+            if (dt.Count != 0)
+                return dt.ToArray();
+            else return null;
+        }
+        public SqlConnection Connection()
+        {
+            return this.conn;
+        }
+        public SqlCommand Command()
+        {
+            return this.cmd;
         }
     }
 

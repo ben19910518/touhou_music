@@ -352,6 +352,24 @@ SELECT username, password, autho FROM [user] WHERE (username = @username)</Comma
             </Mappings>
             <Sources />
           </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="sosTableAdapter" GeneratorDataComponentClassName="sosTableAdapter" Name="sos" UserDataComponentName="sosTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="touhou_musicConnectionString (Settings)" DbObjectName="[touhou music].dbo.song" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT   scode, oricode
+FROM      song</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="scode" DataSetColumn="scode" />
+              <Mapping SourceColumn="oricode" DataSetColumn="oricode" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
         </Tables>
         <Sources />
       </DataSource>
@@ -531,6 +549,26 @@ SELECT username, password, autho FROM [user] WHERE (username = @username)</Comma
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="sos" msprop:Generator_TableClassName="sosDataTable" msprop:Generator_TableVarName="tablesos" msprop:Generator_TablePropName="sos" msprop:Generator_RowDeletingName="sosRowDeleting" msprop:Generator_UserTableName="sos" msprop:Generator_RowChangingName="sosRowChanging" msprop:Generator_RowEvHandlerName="sosRowChangeEventHandler" msprop:Generator_RowDeletedName="sosRowDeleted" msprop:Generator_RowEvArgName="sosRowChangeEvent" msprop:Generator_RowChangedName="sosRowChanged" msprop:Generator_RowClassName="sosRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="scode" msprop:Generator_ColumnVarNameInTable="columnscode" msprop:Generator_ColumnPropNameInRow="scode" msprop:Generator_ColumnPropNameInTable="scodeColumn" msprop:Generator_UserColumnName="scode">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="oricode" msprop:Generator_ColumnVarNameInTable="columnoricode" msprop:Generator_ColumnPropNameInRow="oricode" msprop:Generator_ColumnPropNameInTable="oricodeColumn" msprop:Generator_UserColumnName="oricode">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
     <xs:unique name="Constraint1" msdata:PrimaryKey="true">
@@ -559,13 +597,19 @@ SELECT username, password, autho FROM [user] WHERE (username = @username)</Comma
       <xs:selector xpath=".//mstns:user" />
       <xs:field xpath="mstns:username" />
     </xs:unique>
+    <xs:unique name="DataTable1Key1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:sos" />
+      <xs:field xpath="mstns:scode" />
+      <xs:field xpath="mstns:oricode" />
+    </xs:unique>
   </xs:element>
   <xs:annotation>
     <xs:appinfo>
-      <msdata:Relationship name="FK_gas_album" msdata:parent="album" msdata:child="gas" msdata:parentkey="aname" msdata:childkey="aname" msprop:Generator_UserChildTable="gas" msprop:Generator_ChildPropName="GetgasRows" msprop:Generator_ParentPropName="albumRow" msprop:Generator_UserRelationName="FK_gas_album" msprop:Generator_RelationVarName="relationFK_gas_album" msprop:Generator_UserParentTable="album" />
-      <msdata:Relationship name="FK_gas_group" msdata:parent="group" msdata:child="gas" msdata:parentkey="gname" msdata:childkey="gname" msprop:Generator_UserChildTable="gas" msprop:Generator_ChildPropName="GetgasRows" msprop:Generator_ParentPropName="groupRow" msprop:Generator_UserRelationName="FK_gas_group" msprop:Generator_RelationVarName="relationFK_gas_group" msprop:Generator_UserParentTable="group" />
-      <msdata:Relationship name="FK_gas_song" msdata:parent="song" msdata:child="gas" msdata:parentkey="scode" msdata:childkey="scode" msprop:Generator_UserChildTable="gas" msprop:Generator_ChildPropName="GetgasRows" msprop:Generator_ParentPropName="songRow" msprop:Generator_UserRelationName="FK_gas_song" msprop:Generator_RelationVarName="relationFK_gas_song" msprop:Generator_UserParentTable="song" />
-      <msdata:Relationship name="FK_song_ori" msdata:parent="ori" msdata:child="song" msdata:parentkey="oricode" msdata:childkey="oricode" msprop:Generator_UserChildTable="song" msprop:Generator_ChildPropName="GetsongRows" msprop:Generator_ParentPropName="oriRow" msprop:Generator_UserRelationName="FK_song_ori" msprop:Generator_RelationVarName="relationFK_song_ori" msprop:Generator_UserParentTable="ori" />
+      <msdata:Relationship name="FK_gas_album" msdata:parent="album" msdata:child="gas" msdata:parentkey="aname" msdata:childkey="aname" msprop:Generator_UserChildTable="gas" msprop:Generator_ChildPropName="GetgasRows" msprop:Generator_UserParentTable="album" msprop:Generator_UserRelationName="FK_gas_album" msprop:Generator_RelationVarName="relationFK_gas_album" msprop:Generator_ParentPropName="albumRow" />
+      <msdata:Relationship name="FK_gas_group" msdata:parent="group" msdata:child="gas" msdata:parentkey="gname" msdata:childkey="gname" msprop:Generator_UserChildTable="gas" msprop:Generator_ChildPropName="GetgasRows" msprop:Generator_UserParentTable="group" msprop:Generator_UserRelationName="FK_gas_group" msprop:Generator_RelationVarName="relationFK_gas_group" msprop:Generator_ParentPropName="groupRow" />
+      <msdata:Relationship name="FK_gas_song" msdata:parent="song" msdata:child="gas" msdata:parentkey="scode" msdata:childkey="scode" msprop:Generator_UserChildTable="gas" msprop:Generator_ChildPropName="GetgasRows" msprop:Generator_UserParentTable="song" msprop:Generator_UserRelationName="FK_gas_song" msprop:Generator_RelationVarName="relationFK_gas_song" msprop:Generator_ParentPropName="songRow" />
+      <msdata:Relationship name="FK_song_ori" msdata:parent="ori" msdata:child="song" msdata:parentkey="oricode" msdata:childkey="oricode" msprop:Generator_UserChildTable="song" msprop:Generator_ChildPropName="GetsongRows" msprop:Generator_UserParentTable="ori" msprop:Generator_UserRelationName="FK_song_ori" msprop:Generator_RelationVarName="relationFK_song_ori" msprop:Generator_ParentPropName="oriRow" />
+      <msdata:Relationship name="FK_gas_song1" msdata:parent="sos" msdata:child="gas" msdata:parentkey="scode" msdata:childkey="scode" msprop:Generator_UserChildTable="gas" msprop:Generator_ChildPropName="GetgasRows" msprop:Generator_ParentPropName="sosRow" msprop:Generator_UserRelationName="FK_gas_song1" msprop:Generator_RelationVarName="relationFK_gas_song1" msprop:Generator_UserParentTable="sos" />
     </xs:appinfo>
   </xs:annotation>
 </xs:schema>
