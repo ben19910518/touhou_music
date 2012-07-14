@@ -15,8 +15,8 @@ namespace touhou_music
     {
         private SqlConnection conn;
         private SqlCommand cmd;
-        private string username;
-        private string autho;
+        //private string username;
+        //private string autho;
         private void connectSQL()
         {
             conn = new SqlConnection(DataPool.conString);

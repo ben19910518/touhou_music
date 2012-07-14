@@ -52,129 +52,136 @@ namespace touhou_music
             imagebytes = new byte[1];
             imagebytes[0] = 0;
 
-            DataSet ds;
-            DataSet ds2;
-            DataSet ds3;
-            DataSet ds4;
-            DataSet ds5;
-            DataSet ds6;
-            DataSet ds7;
-            DataSet ds8;
-            DataSet ds9;
-            DataSet ds10;
-            DataSet ds11;
-            DataSet ds12;
+            //DataSet ds;
+            //DataSet ds2;
+            //DataSet ds3;
+            //DataSet ds4;
+            //DataSet ds5;
+            //DataSet ds6;
+            //DataSet ds7;
+            //DataSet ds8;
+            //DataSet ds9;
+            //DataSet ds10;
+            //DataSet ds11;
+            //DataSet ds12;
+
+            List<ComboBox> CB = new List<ComboBox>(11);
+            DataTable[] tp;
+            CB.Add(comboBox2);
+            CB.Add(comboBox3);
+            CB.Add(comboBox4);
+            CB.Add(comboBox5);
+            CB.Add(comboBox6);
+            CB.Add(comboBox7);
+            CB.Add(comboBox8);
+            CB.Add(comboBox9);
+            CB.Add(comboBox10);
+            CB.Add(comboBox11);
+            CB.Add(comboBox12);
             using (sqlAdapter sqladp = new sqlAdapter(DataPool.conString))
             {
-                SqlDataAdapter da2 = new SqlDataAdapter("select distinct acode from [album]", conn);
-
-                da2.Fill(ds2);
-                foreach (DataColumnCollection cols in ds2.Tables[0].Columns)
+                try
                 {
-                    comboBox2.Items.Add(cols.ToString());
+                     tp = sqladp.getDataTables("select distinct acode from [album]",
+                        "select distinct gname from [group]", "select distinct aname from [album]",
+                        "select distinct [time] from [album]", "select distinct track from [song]",
+                        "select distinct lyric from [song]", "select distinct sname from [song]",
+                        "select distinct arranger from [song]", "select distinct style from [song]",
+                        "select distinct vocal from [song]", "select distinct origin from [ori]");
+                     for (int i = 0; i < tp.Length; i++)
+                     {
+                         try
+                         {
+                             for (int j = 0; j < tp[i].Rows.Count; j++)
+                             {
+                                 CB[i].Items.Add(tp[i].Rows[j][0]);
+                             }
+                             CB.ElementAt(i).SelectedIndex = 0;
+                         }
+                         catch (System.Exception ex)
+                         {
+                             System.Diagnostics.Debug.Write(ex.Message);
+                         }
+                     }
                 }
-                comboBox2.SelectedIndex = 0;
-                
-                SqlDataAdapter da3 = new SqlDataAdapter("select distinct gname from [group]", conn);
-
-                da3.Fill(ds3);
-                for (int i = 0; i < ds3.Tables[0].Rows.Count; i++)
+                catch (System.Exception ex)
                 {
-                    comboBox3.Items.Add(ds3.Tables[0].Rows[i][0]);
+                    System.Diagnostics.Debug.Write(ex.Message);
                 }
-
-                comboBox3.SelectedIndex = 0;
-
-                SqlDataAdapter da4 = new SqlDataAdapter("select distinct aname from [album]", conn);
-
-                da4.Fill(ds4);
-                for (int i = 0; i < ds4.Tables[0].Rows.Count; i++)
-                {
-                    comboBox4.Items.Add(ds4.Tables[0].Rows[i][0]);
-                }
-
-                comboBox4.SelectedIndex = 0;
-
-                SqlDataAdapter da5 = new SqlDataAdapter("select distinct [time] from [album]", conn);
-
-                da5.Fill(ds5);
-                for (int i = 0; i < ds5.Tables[0].Rows.Count; i++)
-                {
-                    comboBox5.Items.Add(ds5.Tables[0].Rows[i][0]);
-                }
-
-                comboBox5.SelectedIndex = 0;
-
-                SqlDataAdapter da6 = new SqlDataAdapter("select distinct track from [song]", conn);
-
-                da6.Fill(ds6);
-                for (int i = 0; i < ds6.Tables[0].Rows.Count; i++)
-                {
-                    comboBox6.Items.Add(ds6.Tables[0].Rows[i][0]);
-                }
-
-                comboBox6.SelectedIndex = 0;
-
-                SqlDataAdapter da7 = new SqlDataAdapter("select distinct lyric from [song]", conn);
-
-                da7.Fill(ds7);
-                for (int i = 0; i < ds7.Tables[0].Rows.Count; i++)
-                {
-                    comboBox7.Items.Add(ds7.Tables[0].Rows[i][0]);
-                }
-
-                comboBox7.SelectedIndex = 0;
-
-                SqlDataAdapter da8 = new SqlDataAdapter("select distinct sname from [song]", conn);
-
-                da8.Fill(ds8);
-                for (int i = 0; i < ds8.Tables[0].Rows.Count; i++)
-                {
-                    comboBox8.Items.Add(ds8.Tables[0].Rows[i][0]);
-                }
-
-                comboBox8.SelectedIndex = 0;
-
-                SqlDataAdapter da9 = new SqlDataAdapter("select distinct arranger from [song]", conn);
-
-                da9.Fill(ds9);
-                for (int i = 0; i < ds9.Tables[0].Rows.Count; i++)
-                {
-                    comboBox9.Items.Add(ds9.Tables[0].Rows[i][0]);
-                }
-
-                comboBox9.SelectedIndex = 0;
-
-                SqlDataAdapter da10 = new SqlDataAdapter("select distinct style from [song]", conn);
-
-                da10.Fill(ds10);
-                for (int i = 0; i < ds10.Tables[0].Rows.Count; i++)
-                {
-                    comboBox10.Items.Add(ds10.Tables[0].Rows[i][0]);
-                }
-
-                comboBox10.SelectedIndex = 0;
-
-                SqlDataAdapter da11 = new SqlDataAdapter("select distinct vocal from [song]", conn);
-
-                da11.Fill(ds11);
-                for (int i = 0; i < ds11.Tables[0].Rows.Count; i++)
-                {
-                    comboBox11.Items.Add(ds11.Tables[0].Rows[i][0]);
-                }
-
-                comboBox11.SelectedIndex = 0;
-
-                SqlDataAdapter da12 = new SqlDataAdapter("select distinct origin from [ori]", conn);
-
-                da12.Fill(ds12);
-                for (int i = 0; i < ds12.Tables[0].Rows.Count; i++)
-                {
-                    comboBox12.Items.Add(ds12.Tables[0].Rows[i][0]);
-                }
-
-                comboBox12.SelectedIndex = 0;
             }
+
+            //comboBox2.SelectedIndex = 0;
+
+            //for (int i = 0; i < ds3.Tables[0].Rows.Count; i++)
+            //{
+            //    comboBox3.Items.Add(ds3.Tables[0].Rows[i][0]);
+            //}
+
+            //comboBox3.SelectedIndex = 0;
+
+            //for (int i = 0; i < ds4.Tables[0].Rows.Count; i++)
+            //{
+            //    comboBox4.Items.Add(ds4.Tables[0].Rows[i][0]);
+            //}
+
+            //comboBox4.SelectedIndex = 0;
+
+            //for (int i = 0; i < ds5.Tables[0].Rows.Count; i++)
+            //{
+            //    comboBox5.Items.Add(ds5.Tables[0].Rows[i][0]);
+            //}
+
+            //comboBox5.SelectedIndex = 0;
+
+            //for (int i = 0; i < ds6.Tables[0].Rows.Count; i++)
+            //{
+            //    comboBox6.Items.Add(ds6.Tables[0].Rows[i][0]);
+            //}
+
+            //comboBox6.SelectedIndex = 0;
+
+            //for (int i = 0; i < ds7.Tables[0].Rows.Count; i++)
+            //{
+            //    comboBox7.Items.Add(ds7.Tables[0].Rows[i][0]);
+            //}
+
+            //comboBox7.SelectedIndex = 0;
+
+            //for (int i = 0; i < ds8.Tables[0].Rows.Count; i++)
+            //{
+            //    comboBox8.Items.Add(ds8.Tables[0].Rows[i][0]);
+            //}
+
+            //comboBox8.SelectedIndex = 0;
+
+            //for (int i = 0; i < ds9.Tables[0].Rows.Count; i++)
+            //{
+            //    comboBox9.Items.Add(ds9.Tables[0].Rows[i][0]);
+            //}
+
+            //comboBox9.SelectedIndex = 0;
+
+            //for (int i = 0; i < ds10.Tables[0].Rows.Count; i++)
+            //{
+            //    comboBox10.Items.Add(ds10.Tables[0].Rows[i][0]);
+            //}
+
+            //comboBox10.SelectedIndex = 0;
+
+            //for (int i = 0; i < ds11.Tables[0].Rows.Count; i++)
+            //{
+            //    comboBox11.Items.Add(ds11.Tables[0].Rows[i][0]);
+            //}
+
+            //comboBox11.SelectedIndex = 0;
+
+            //for (int i = 0; i < ds12.Tables[0].Rows.Count; i++)
+            //{
+            //    comboBox12.Items.Add(ds12.Tables[0].Rows[i][0]);
+            //}
+
+            //comboBox12.SelectedIndex = 0;
+            
         }
 
         private byte[] ImageToStream(Image image)
@@ -186,132 +193,106 @@ namespace touhou_music
         {
 
             if (comboBox2.Text == "" || comboBox4.Text == "" || comboBox6.Text == "" || comboBox3.Text == "" || comboBox8.Text == "" || comboBox9.Text == "")
-            { MessageBox.Show("请填写完整带“*”的数据", "提示"); return; }
-            
-            
-
+            {
+                MessageBox.Show("请填写完整带“*”的数据", "提示");
+                return;
+            }
             //________________________________________________________________________________________________
             addacode = comboBox2.Text;
             addaname = comboBox4.Text.Replace("'", "''");
             addtime = comboBox5.Text;
-
             addgcode = addacode.Substring(0, 4);
             addtrack = comboBox6.Text;
             addscode = addacode + addtrack;
-
             addgname = comboBox3.Text.Replace("'", "''");
-
-
             addorigin = comboBox12.Text;
-
             addsname = comboBox8.Text.Replace("'", "''");
-
             addarranger = comboBox9.Text.Replace("'", "''");
             addlyric = comboBox7.Text.Replace("'", "''");
             addvocal = comboBox11.Text.Replace("'", "''");
             addstyle = comboBox10.Text.Replace("'", "''");
 
-
-            connectSQL();
-
-                string sqlori = "select oricode from [ori] where origin = '" + addorigin + "'";
-                cmd = new SqlCommand(sqlori, conn);
-
-                addoricode = cmd.ExecuteScalar() as string;
-
-            if(addoricode==null)
-            {  MessageBox.Show("没有找到原曲！","消息提示");
-            closeSQL();
-            Form9 Form9 = new Form9();
-            Form9.ShowDialog();
-
-            return;}
-
-
-                string sql = "select acode from [album] where acode = '" + addacode + "'";
-            cmd = new SqlCommand(sql, conn);
-                        object obj = cmd.ExecuteScalar();
-            //对数据库查询出的值进行判断
-            if (obj == null)
+            using (sqlAdapter sqladp = new sqlAdapter(DataPool.conString))
             {
-                //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-                sql = "insert into [album] values ('" + addacode + "','" + addaname + "','" + addtime + "',@cover)";
-                cmd = new SqlCommand(sql, conn);
-                cmd.Parameters.Add("cover", SqlDbType.Image);
+                string sql = "select oricode from [ori] where origin = '" + addorigin + "'";
+                addoricode = sqladp.ExecuteScalar(sql) as string;
+                if (addoricode == null)
+                {
+                    MessageBox.Show("没有找到原曲！", "消息提示");
+                    Form9 Form9 = new Form9();
+                    Form9.ShowDialog();
+                    return;
+                }
 
-                cmd.Parameters["cover"].Value = imagebytes;
+                sql = "select acode from [album] where acode = '" + addacode + "'";
+                object obj = sqladp.ExecuteScalar(sql);
 
-                cmd.ExecuteNonQuery();
+                if (obj == null)
+                {
+                    sql = "insert into [album] values ('" + addacode + "','" + addaname + "','" + addtime + "',@cover)";
+                    sqladp.setCommand(sql);
+                    sqladp.Command().Parameters.Add("cover", SqlDbType.Image);
+                    sqladp.Command().Parameters["cover"].Value = imagebytes;
+                    sqladp.Command().ExecuteNonQuery();
+                }
 
+                sql = "select gcode from [group] where gcode = '" + addgcode + "'";
+                obj = sqladp.ExecuteScalar(sql);
+                //对数据库查询出的值进行判断
+                if (obj == null)
+                {
+                    sql = "insert into [group] values ('" + addgname + "','" + addgcode + "')";
+                    sqladp.ExecuteScalar(sql);
 
+                }
 
-                //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                try
+                {
+                    sql = "insert into [song] values ('" + addsname + "','" + addtrack + "','" + addarranger + "','" + addlyric + "','" + addvocal + "','" + addoricode + "','" + addstyle + "','" + addscode + "','" + DataPool.currentID + "')";
+                    sqladp.ExecuteScalar(sql);
 
+                    sql = "insert into [gas] values ('" + addgcode + "','" + addacode + "','" + addscode + "')";
+                    sqladp.ExecuteScalar(sql);
 
-
-
-                
+                    MessageBox.Show("提交成功!", "提示信息");
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("错误", "提示信息");
+                    return;
+                }
             }
-
-             sql = "select gcode from [group] where gcode = '" + addgcode + "'";
-            cmd = new SqlCommand(sql, conn);
-             obj = cmd.ExecuteScalar();
-            //对数据库查询出的值进行判断
-            if (obj == null)
-            {
-                sql = "insert into [group] values ('" + addgname + "','" + addgcode + "')";
-                cmd = new SqlCommand(sql, conn);
-                cmd.ExecuteScalar();
-                
-            }
-
-            try
-            {
-                sql = "insert into [song] values ('" + addsname + "','" + addtrack + "','" + addarranger + "','" + addlyric + "','" + addvocal + "','" + addoricode + "','" + addstyle + "','" + addscode + "','" + DataPool.currentID + "')";
-                cmd = new SqlCommand(sql, conn);
-                cmd.ExecuteScalar();
-
-
-                sql = "insert into [gas] values ('" + addgcode + "','" + addacode + "','" + addscode + "')";
-                cmd = new SqlCommand(sql, conn);
-                cmd.ExecuteScalar();
-            }
-            catch { MessageBox.Show("错误", "提示信息"); closeSQL(); return; }
-
-            closeSQL();
-            MessageBox.Show("提交成功!", "提示信息");
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            connectSQL();
-            string sql1 = "select autho from [user] where username = '" + DataPool.currentID + "'";
-            cmd = new SqlCommand(sql1, conn);
-            string autho = cmd.ExecuteScalar() as string;
-            closeSQL();
-            if (autho == "1"||autho=="0")
+            string autho;
+            using (sqlAdapter sqladp = new sqlAdapter(DataPool.conString))
+            {
+                string sql = "select autho from [user] where username = '" + DataPool.currentID + "'";
+                autho = sqladp.ExecuteScalar(sql) as string;
+            }
+            if (autho == "1" || autho == "0")
             {
                 Form7 Form7 = new Form7();
-                Form7.ShowDialog();                
+                Form7.ShowDialog();
             }
             else
             {
-                MessageBox.Show("没有权限", "提示");
+                MessageBox.Show("权限不足", "提示");
                 return;
             }
-
-
-
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            connectSQL();
-            string sql1 = "select autho from [user] where username = '" + DataPool.currentID + "'";
-            cmd = new SqlCommand(sql1, conn);
-            string autho = cmd.ExecuteScalar() as string;
-            closeSQL();
+            string autho;
+            using (sqlAdapter sqladp = new sqlAdapter(DataPool.conString))
+            {
+                string sql = "select autho from [user] where username = '" + DataPool.currentID + "'";
+                autho = sqladp.ExecuteScalar(sql) as string;
+            }
             if (autho == "1" || autho == "0")
             {
                 Form9 Form9 = new Form9();
@@ -319,18 +300,19 @@ namespace touhou_music
             }
             else
             {
-                MessageBox.Show("没有权限", "提示");
+                MessageBox.Show("权限不足", "提示");
                 return;
             }
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            connectSQL();
-            string sql1 = "select autho from [user] where username = '" + DataPool.currentID + "'";
-            cmd = new SqlCommand(sql1, conn);
-            string autho = cmd.ExecuteScalar() as string;
-            closeSQL();
+            string autho;
+            using (sqlAdapter sqladp = new sqlAdapter(DataPool.conString))
+            {
+                string sql = "select autho from [user] where username = '" + DataPool.currentID + "'";
+                autho = sqladp.ExecuteScalar(sql) as string;
+            }
             if (autho == "1" || autho == "0")
             {
                 Form12 Form12 = new Form12();
@@ -338,7 +320,7 @@ namespace touhou_music
             }
             else
             {
-                MessageBox.Show("没有权限", "提示");
+                MessageBox.Show("权限不足", "提示");
                 return;
             }
 

@@ -32,21 +32,21 @@ namespace touhou_music
         private string modlyric;
         private string modvocal;
         private string modstyle;
-        private string modacode2;
+        //private string modacode2;
         private string modaname2;
         private string modtime2;
-        private string modgcode2;
-        private string modscode2;
+        //private string modgcode2;
+        //private string modscode2;
         private string modgname2;
         private string modoricode2;
         private string modorigin2;
         private string modsname2;
-        private string modtrack2;
+        //private string modtrack2;
         private string modarranger2;
         private string modlyric2;
         private string modvocal2;
         private string modstyle2;
-        private string adduser;
+        //private string adduser;
         public Form12()
         {
             InitializeComponent();
