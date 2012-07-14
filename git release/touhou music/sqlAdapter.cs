@@ -60,21 +60,19 @@ namespace touhou_music
             SqlDataAdapter da = new SqlDataAdapter(cmd, conn);
             da.Fill(dt);
         }
-        public DataTable[] getDataTables(params string[] cmd)
+        public int getDataTables(out List<DataTable> dt, params string[] cmd)
         {
-            List<DataTable> dt = new List<DataTable>();
+            dt = new List<DataTable>();
             SqlDataAdapter da;
             DataTable tp = new DataTable();
             foreach(string co in cmd)
             {
                 da = new SqlDataAdapter(co, conn);
                 da.Fill(tp);
-                tp.Clear();
                 dt.Add(tp);
+                tp = new DataTable();
             }
-            if (dt.Count != 0)
-                return dt.ToArray();
-            else return null;
+            return dt.Count;
         }
         public SqlConnection Connection()
         {
