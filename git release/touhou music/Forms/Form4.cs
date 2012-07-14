@@ -66,7 +66,7 @@ namespace touhou_music
             //DataSet ds12;
 
             List<ComboBox> CB = new List<ComboBox>(11);
-            DataTable[] tp;
+            List<DataTable> dt;
             CB.Add(comboBox2);
             CB.Add(comboBox3);
             CB.Add(comboBox4);
@@ -78,25 +78,26 @@ namespace touhou_music
             CB.Add(comboBox10);
             CB.Add(comboBox11);
             CB.Add(comboBox12);
+
             using (sqlAdapter sqladp = new sqlAdapter(DataPool.conString))
             {
                 try
                 {
-                     tp = sqladp.getDataTables("select distinct acode from [album]",
+                     sqladp.getDataTables(out dt, "select distinct acode from [album]",
                         "select distinct gname from [group]", "select distinct aname from [album]",
                         "select distinct [time] from [album]", "select distinct track from [song]",
                         "select distinct lyric from [song]", "select distinct sname from [song]",
                         "select distinct arranger from [song]", "select distinct style from [song]",
                         "select distinct vocal from [song]", "select distinct origin from [ori]");
-                     for (int i = 0; i < tp.Length; i++)
+                     for (int i = 0; i < dt.Count; i++)
                      {
                          try
                          {
-                             for (int j = 0; j < tp[i].Rows.Count; j++)
+                             for (int j = 0; j < dt[i].Rows.Count; j++)
                              {
-                                 CB[i].Items.Add(tp[i].Rows[j][0]);
+                                 CB[i].Items.Add(dt[i].Rows[j][0]);
                              }
-                             CB.ElementAt(i).SelectedIndex = 0;
+                                 CB.ElementAt(i).SelectedIndex = 0;
                          }
                          catch (System.Exception ex)
                          {
