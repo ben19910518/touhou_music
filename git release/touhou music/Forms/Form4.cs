@@ -79,7 +79,7 @@ namespace touhou_music
             CB.Add(comboBox11);
             CB.Add(comboBox12);
 
-            using (sqlAdapter sqladp = new sqlAdapter(DataPool.conString))
+            using (sqlAdapter sqladp = new sqlAdapter())
             {
                 try
                 {
@@ -213,7 +213,7 @@ namespace touhou_music
             addvocal = comboBox11.Text.Replace("'", "''");
             addstyle = comboBox10.Text.Replace("'", "''");
 
-            using (sqlAdapter sqladp = new sqlAdapter(DataPool.conString))
+            using (sqlAdapter sqladp = new sqlAdapter())
             {
 
                 string sql = "select oricode from [ori] where origin = '" + addorigin + "'";
@@ -233,9 +233,9 @@ namespace touhou_music
                 {
                     sql = "insert into [album] values ('" + addacode + "','" + addaname + "','" + addtime + "',@cover)";
                     sqladp.setCommand(sql);
-                    sqladp.Command().Parameters.Add("cover", SqlDbType.Image);
-                    sqladp.Command().Parameters["cover"].Value = imagebytes;
-                    sqladp.Command().ExecuteNonQuery();
+                    sqladp.Command.Parameters.Add("cover", SqlDbType.Image);
+                    sqladp.Command.Parameters["cover"].Value = imagebytes;
+                    sqladp.Command.ExecuteNonQuery();
                 }
 
                 sql = "select gcode from [group] where gcode = '" + addgcode + "'";
@@ -269,7 +269,7 @@ namespace touhou_music
         private void button2_Click(object sender, EventArgs e)
         {
             string autho;
-            using (sqlAdapter sqladp = new sqlAdapter(DataPool.conString))
+            using (sqlAdapter sqladp = new sqlAdapter())
             {
                 string sql = "select autho from [user] where username = '" + DataPool.currentID + "'";
                 autho = sqladp.ExecuteScalar(sql) as string;
@@ -289,7 +289,7 @@ namespace touhou_music
         private void button3_Click(object sender, EventArgs e)
         {
             string autho;
-            using (sqlAdapter sqladp = new sqlAdapter(DataPool.conString))
+            using (sqlAdapter sqladp = new sqlAdapter())
             {
                 string sql = "select autho from [user] where username = '" + DataPool.currentID + "'";
                 autho = sqladp.ExecuteScalar(sql) as string;
@@ -309,7 +309,7 @@ namespace touhou_music
         private void button4_Click(object sender, EventArgs e)
         {
             string autho;
-            using (sqlAdapter sqladp = new sqlAdapter(DataPool.conString))
+            using (sqlAdapter sqladp = new sqlAdapter())
             {
                 string sql = "select autho from [user] where username = '" + DataPool.currentID + "'";
                 autho = sqladp.ExecuteScalar(sql) as string;

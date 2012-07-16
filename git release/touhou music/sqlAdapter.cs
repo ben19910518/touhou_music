@@ -10,36 +10,40 @@ namespace touhou_music
 {
     class sqlAdapter : IDisposable
     {
-        private SqlConnection conn;
+        private static SqlConnection conn;
         private SqlCommand cmd;
-        public sqlAdapter(string connectCommand)
+        private bool flag = false;
+        static sqlAdapter()
         {
-            conn = new SqlConnection(connectCommand);
-            conn.Open();
+            conn = new SqlConnection(DataPool.conString);
+        }
+        public sqlAdapter()
+        {
+            sqlAdapter.conn.Open();
         }
         ~sqlAdapter()
         {
+            conn.Close();
             this.Dispose();
         }
         public void Dispose()
         {
             conn.Close();
-            conn.Dispose();
         }
         public void setCommand(string command)
         {
-            this.cmd = new SqlCommand(command, this.conn);
+            this.cmd = new SqlCommand(command, conn);
         }
         public System.Object ExecuteScalar(string command)
         {
             if (command == null)
                 return null;
-            cmd = new SqlCommand(command, this.conn);
+            cmd = new SqlCommand(command, conn);
             return cmd.ExecuteScalar();
         }
         public void getExecuteReader(out SqlDataReader ds, string command)
         {
-            cmd = new SqlCommand(command, this.conn);
+            cmd = new SqlCommand(command, conn);
             ds = cmd.ExecuteReader();
             cmd = null;
         }
@@ -74,13 +78,13 @@ namespace touhou_music
             }
             return dt.Count;
         }
-        public SqlConnection Connection()
+        public SqlConnection Connection
         {
-            return this.conn;
+            get { return conn; }
         }
-        public SqlCommand Command()
+        public SqlCommand Command
         {
-            return this.cmd;
+            get { return this.cmd; }
         }
     }
 

@@ -95,13 +95,13 @@ namespace touhou_music
             }
             if(userid.Contains("\'"))
             {
-                MessageBox.Show("用户名不存在!", "提示");
+                MessageBox.Show("用户名非法!", "提示");
                 return;
             }
 
             try
             {
-                using (sqlAdapter sqladp = new sqlAdapter(DataPool.conString))
+                using (sqlAdapter sqladp = new sqlAdapter())
                 {
                     string sql = "select password from [user] where username = '" + userid + "'";
 
@@ -109,27 +109,27 @@ namespace touhou_music
 
                     if (obj == null) 
                         // user from kamiro website
-                    {
-                        using (sqlAdapter sqlKamiro = new sqlAdapter(DataPool.conkamiro))
-                        {
-                            sql = "select password from [userTable] where userName = '" + userid + "'";
-                            string kamiropass = sqlKamiro.ExecuteScalar(sql) as string;
-                            if (psHd(password) == kamiropass)
-                            {
-                                DataPool.currentID = userid;
-                                DataPool.currentMD5Password = obj;
-                                //this.Visible = false;
-                                MessageBox.Show("欢迎来自KCM的账号！", "消息");
+                    //{
+                    //    using (sqlAdapter sqlKamiro = new sqlAdapter(DataPool.conkamiro))
+                    //    {
+                    //        sql = "select password from [userTable] where userName = '" + userid + "'";
+                    //        string kamiropass = sqlKamiro.ExecuteScalar(sql) as string;
+                    //        if (psHd(password) == kamiropass)
+                    //        {
+                    //            DataPool.currentID = userid;
+                    //            DataPool.currentMD5Password = obj;
+                    //            //this.Visible = false;
+                    //            MessageBox.Show("欢迎来自KCM的账号！", "消息");
 
-                                doRememberPasswd();
+                    //            doRememberPasswd();
 
-                                this.Dispose();
+                    //            this.Dispose();
 
-                            }
-                            else
+                    //        }
+                    //        else
                                 MessageBox.Show("密码错误", "提示");
-                        }
-                    }
+                        //}
+                    //}
                     else
                         // user of this program
                     {
