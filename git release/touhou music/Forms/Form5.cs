@@ -14,9 +14,6 @@ namespace touhou_music
 {
     public partial class Form5 : Form
     {
-        private SqlConnection conn;
-        //private SqlCommand cmd;
-
         public Form5()
         {
             InitializeComponent();
@@ -31,28 +28,15 @@ namespace touhou_music
             DataPool.conString = "Data Source=" + textBox1.Text + ";Initial Catalog=touhou music;User ID=thview";
             try
             {
-
-                connectSQL();
-                closeSQL();
+                sqlAdapter sqladp = new sqlAdapter();
+                sqladp.Dispose();
             }
-            catch { MessageBox.Show("连接失败！", "提示"); return; }
+            catch
+            {
+                MessageBox.Show("连接失败！", "提示");
+                return;
+            }
             MessageBox.Show("连接成功！", "提示");
-        }
-   
-
-
-
-            private void connectSQL()
-        {
-          //  conn = new SqlConnection("Data Source="+textBox1.Text+";Initial Catalog=touhou music;User ID=thview");
-            conn = new SqlConnection(DataPool.conString);
-
-            conn.Open();
-        }
-
-        private void closeSQL()
-        {
-            conn.Close();
         }
     }
 }

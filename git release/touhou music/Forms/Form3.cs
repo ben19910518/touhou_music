@@ -83,7 +83,7 @@ namespace touhou_music
             }
             password = MD5Create(password);
             ////////////////////////////////////////////////////////////////
-            using (sqlAdapter sqladp = new sqlAdapter(DataPool.conString))
+            using (sqlAdapter sqladp = new sqlAdapter())
             {
                 string sql = "select username from [user] where username = '" + userid + "'";
                 object obj = sqladp.ExecuteScalar(sql);

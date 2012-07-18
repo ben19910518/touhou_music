@@ -42,7 +42,7 @@ namespace touhou_music
             //if (DataPool.currentID == "")
             //    return;
 
-            using (sqlAdapter sqladp = new sqlAdapter(DataPool.conString))
+            using (sqlAdapter sqladp = new sqlAdapter())
             {
                 string sql = "select count(scode) from gas ";
                 int ssum = Convert.ToUInt16(sqladp.ExecuteScalar(sql));
@@ -51,21 +51,21 @@ namespace touhou_music
                 int peoplesum = Convert.ToUInt16(sqladp.ExecuteScalar(sql));
                 toolStripStatusLabel3.Text = "注册人数：" + peoplesum;
                 sql = "select autho from [user] where username = '" + DataPool.currentID + "'";
-
                 string autho = sqladp.ExecuteScalar(sql) as string;
                 DataPool.currentAutho = autho;
 
-                if (autho == "3")
+                switch (autho)
                 {
-                    添加原曲ToolStripMenuItem.Enabled = false;
-                    添加ToolStripMenuItem.Enabled = false;
-                    删除ToolStripMenuItem.Enabled = false;
-                    修改ToolStripMenuItem.Enabled = false;
-                }
-                else if (autho == "2")
-                {
-                    删除ToolStripMenuItem.Enabled = false;
-                    修改ToolStripMenuItem.Enabled = false;
+                    case "3": 
+                        添加原曲ToolStripMenuItem.Enabled = false;
+                        添加ToolStripMenuItem.Enabled = false;
+                        删除ToolStripMenuItem.Enabled = false;
+                        修改ToolStripMenuItem.Enabled = false;
+                        break;
+                    case "2":
+                        删除ToolStripMenuItem.Enabled = false;
+                        修改ToolStripMenuItem.Enabled = false;
+                        break;
                 }
 
                 DataSet ds;
@@ -75,7 +75,6 @@ namespace touhou_music
                 {
                     comboBox1.Items.Add(ds.Tables[0].Rows[i][0]);
                 }
-
                 comboBox1.SelectedIndex = 0;
             }
             
@@ -131,7 +130,7 @@ namespace touhou_music
                 sqlstr = sqlstr + " and origin='" + temporigin + "'";
 
             DataSet ds1;
-            using (sqlAdapter sqladp = new sqlAdapter(DataPool.conString))
+            using (sqlAdapter sqladp = new sqlAdapter())
             {
                 sqladp.getDataSet(sqlstr, out ds1, "detail");
             }
@@ -367,7 +366,7 @@ namespace touhou_music
             string nowalbum = dataGridView1.Rows[row].Cells[1].Value.ToString();
             byte[] imagebytes = null;
 
-            using (sqlAdapter sqladp = new sqlAdapter(DataPool.conString))
+            using (sqlAdapter sqladp = new sqlAdapter())
             {
                 //" + tempaname + "
                 SqlDataReader dr;
