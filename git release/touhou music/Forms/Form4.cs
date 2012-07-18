@@ -52,19 +52,6 @@ namespace touhou_music
             imagebytes = new byte[1];
             imagebytes[0] = 0;
 
-            //DataSet ds;
-            //DataSet ds2;
-            //DataSet ds3;
-            //DataSet ds4;
-            //DataSet ds5;
-            //DataSet ds6;
-            //DataSet ds7;
-            //DataSet ds8;
-            //DataSet ds9;
-            //DataSet ds10;
-            //DataSet ds11;
-            //DataSet ds12;
-
             List<ComboBox> CB = new List<ComboBox>(11);
             List<DataTable> dt;
             CB.Add(comboBox2);
@@ -78,7 +65,6 @@ namespace touhou_music
             CB.Add(comboBox10);
             CB.Add(comboBox11);
             CB.Add(comboBox12);
-
             using (sqlAdapter sqladp = new sqlAdapter())
             {
                 try
@@ -89,21 +75,7 @@ namespace touhou_music
                         "select distinct lyric from [song]", "select distinct sname from [song]",
                         "select distinct arranger from [song]", "select distinct style from [song]",
                         "select distinct vocal from [song]", "select distinct origin from [ori]");
-                     for (int i = 0; i < dt.Count; i++)
-                     {
-                         try
-                         {
-                             for (int j = 0; j < dt[i].Rows.Count; j++)
-                             {
-                                 CB[i].Items.Add(dt[i].Rows[j][0]);
-                             }
-                                 CB.ElementAt(i).SelectedIndex = 0;
-                         }
-                         catch (System.Exception ex)
-                         {
-                             System.Diagnostics.Debug.Write(ex.Message);
-                         }
-                     }
+                     Program.fillIn(ref dt, ref CB);
                 }
                 catch (System.Exception ex)
                 {

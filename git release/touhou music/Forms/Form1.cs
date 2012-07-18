@@ -334,7 +334,7 @@ namespace touhou_music
                 }
             }
 
-            using (sqlAdapter sqladp = new sqlAdapter(DataPool.conString))
+            using (sqlAdapter sqladp = new sqlAdapter())
             {
                 string sql = "select password from [user] where username = '" + userid + "'";
                 object obj = sqladp.ExecuteScalar(sql);
@@ -361,7 +361,7 @@ namespace touhou_music
                         }
                         else
                         {
-                            MessageBox.Show("没有权限", "提示");
+                            MessageBox.Show("权限不足", "提示");
                             return;
                         }
                     }

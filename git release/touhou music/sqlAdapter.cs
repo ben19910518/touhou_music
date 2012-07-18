@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Data.SqlClient;
 using System.Data;
+using System.Diagnostics;
 using touhou_music.datas;
 
 namespace touhou_music
@@ -19,7 +20,15 @@ namespace touhou_music
         }
         public sqlAdapter()
         {
-            sqlAdapter.conn.Open();
+            try
+            {
+                sqlAdapter.conn.Open();
+            }
+            catch (System.InvalidOperationException ex)
+            {
+                Trace.WriteLine(ex.StackTrace);
+                return;
+            }
         }
         ~sqlAdapter()
         {
@@ -41,11 +50,17 @@ namespace touhou_music
             cmd = new SqlCommand(command, conn);
             return cmd.ExecuteScalar();
         }
+        public int ExecuteNonQuery(string command)
+        {
+            if (command == null)
+                return 0;
+            cmd = new SqlCommand(command, conn);
+            return cmd.ExecuteNonQuery();
+        }
         public void getExecuteReader(out SqlDataReader ds, string command)
         {
             cmd = new SqlCommand(command, conn);
             ds = cmd.ExecuteReader();
-            cmd = null;
         }
         public void getDataSet(string cmd, out DataSet ds)
         {

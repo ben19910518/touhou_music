@@ -16,8 +16,6 @@ namespace touhou_music
         private string userid;
         private string password;
         private string password2;
-        private SqlConnection conn;
-        private SqlCommand cmd;
 
         private string MD5Create(string STR) //STR为待加密的string  
         {
@@ -53,24 +51,12 @@ namespace touhou_music
                     return;
                 }
             }
-            connectSQL();
-            string sql = "select quest from [user] where username = '" + userid + "'";
-            cmd = new SqlCommand(sql, conn);
-
-            string quest= cmd.ExecuteScalar() as string;
-            textBox2.Text = quest;
-            closeSQL();
-        }
-        private void connectSQL()
-        {
-            conn = new SqlConnection(DataPool.conString);
-
-            conn.Open();
-        }
-
-        private void closeSQL()
-        {
-            conn.Close();
+            using (sqlAdapter sqladp = new sqlAdapter())
+            {
+                string sql = "select quest from [user] where username = '" + userid + "'";
+                string quest = sqladp.ExecuteScalar(sql) as string;
+                textBox2.Text = quest;
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -82,25 +68,22 @@ namespace touhou_music
                 MessageBox.Show("请输入密码", "提示");
                 return;
             }
-            connectSQL();
-            password = MD5Create(password);
-            string sql = "select ans from [user] where username = '" + userid + "'";
-            cmd = new SqlCommand(sql, conn);
-
-            string ans = cmd.ExecuteScalar() as string;
-            if (ans == textBox3.Text)
+            using (sqlAdapter sqladp = new sqlAdapter())
             {
-                sql = "update [user] set password='" + password + "' where username='" + userid + "'";
-                cmd = new SqlCommand(sql, conn);
-                cmd.ExecuteScalar();
-                closeSQL();
-                MessageBox.Show("修改密码成功！", "消息");
+                password = MD5Create(password);
+                string sql = "select ans from [user] where username = '" + userid + "'";
+                string ans = sqladp.ExecuteScalar(sql) as string;
+                if (ans == textBox3.Text)
+                {
+                    sql = "update [user] set password='" + password + "' where username='" + userid + "'";
+                    sqladp.ExecuteScalar(sql);
+                    MessageBox.Show("修改密码成功！", "消息");
 
-            }
-            else
-            {
-                closeSQL();
-                MessageBox.Show("验证失败！", "消息");
+                }
+                else
+                {
+                    MessageBox.Show("验证失败！", "消息");
+                }
             }
         }
     }

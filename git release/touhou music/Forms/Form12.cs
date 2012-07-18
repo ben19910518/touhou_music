@@ -16,8 +16,6 @@ namespace touhou_music
     {
         private byte[] imagebytes;
         private string fullpath;
-        private SqlConnection conn;
-        private SqlCommand cmd;
         private string modacode;
         private string modaname;
         private string modtime;
@@ -32,61 +30,37 @@ namespace touhou_music
         private string modlyric;
         private string modvocal;
         private string modstyle;
-        //private string modacode2;
         private string modaname2;
         private string modtime2;
-        //private string modgcode2;
-        //private string modscode2;
         private string modgname2;
         private string modoricode2;
         private string modorigin2;
         private string modsname2;
-        //private string modtrack2;
         private string modarranger2;
         private string modlyric2;
         private string modvocal2;
         private string modstyle2;
+        //private string modgcode2;
+        //private string modscode2;
+        //private string modacode2;
+        //private string modtrack2;
         //private string adduser;
         public Form12()
         {
             InitializeComponent();
-            connectSQL();
-            DataSet ds2 = new DataSet();
-            SqlDataAdapter da2 = new SqlDataAdapter("select distinct acode from [album]", conn);
-
-            da2.Fill(ds2);
-            for (int i = 0; i < ds2.Tables[0].Rows.Count; i++)
+            using (sqlAdapter sqladp = new sqlAdapter())
             {
-                comboBox2.Items.Add(ds2.Tables[0].Rows[i][0]);
+                DataSet ds2;
+                sqladp.getDataSet("select distinct acode from [album]", out ds2);
+                for (int i = 0; i < ds2.Tables[0].Rows.Count; i++)
+                {
+                    comboBox2.Items.Add(ds2.Tables[0].Rows[i][0]);
+                }
+                comboBox2.SelectedIndex = 0;
             }
-
-            comboBox2.SelectedIndex = 0;
-
-
-//////////////////
-            closeSQL();
-
         }
-        private void connectSQL()
-        {
-            conn = new SqlConnection(DataPool.conString);
-
-            conn.Open();
-        }
-
-        private void closeSQL()
-        {
-            conn.Close();
-        }
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void button2_Click(object sender, EventArgs e)
         {
-            string sql;
-           
       //      modacode2 = comboBox2.Text;
       //      modtrack2 = comboBox6.Text;
        //     modscode2 = modacode2 + modtrack2;
@@ -94,17 +68,12 @@ namespace touhou_music
             modgname2 = comboBox3.Text.Replace("'", "''");
             if (modgname2 != modgname)
             {
-                connectSQL();
-                sql = "update [group] set gname='" + modgname2 + "' where gcode='" + modgcode + "'";
-                cmd = new SqlCommand(sql, conn);
-                cmd.ExecuteNonQuery();
-               // cmd.ExecuteScalar();
-                closeSQL();
+                using (sqlAdapter sqladp = new sqlAdapter())
+                {
+                    sqladp.ExecuteNonQuery("update [group] set gname='" + modgname2 + "' where gcode='" + modgcode + "'");
+                }
                 MessageBox.Show("修改社团名成功！", "消息");
             }
-
-
-
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -140,25 +109,21 @@ namespace touhou_music
             closeSQL();
             MessageBox.Show("修改专辑图片成功！", "消息");
 */
-            connectSQL();
-
-            sql = "delete from [album] where acode='" + modacode + "'";
-            cmd = new SqlCommand(sql, conn);
-            cmd.ExecuteNonQuery();
-            sql = "insert into [album] values ('" + modacode + "','" +modaname2 + "','" + modtime2 + "',@cover)";
-            cmd = new SqlCommand(sql, conn);
-            cmd.Parameters.Add("cover", SqlDbType.Image);
-
-            cmd.Parameters["cover"].Value = imagebytes;
-
-            cmd.ExecuteNonQuery();
-            closeSQL();
+            using (sqlAdapter sqladp = new sqlAdapter())
+            {
+                sql = "delete from [album] where acode='" + modacode + "'";
+                sqladp.ExecuteNonQuery(sql);
+                sql = "insert into [album] values ('" + modacode + "','" + modaname2 + "','" + modtime2 + "',@cover)";
+                sqladp.setCommand(sql);
+                sqladp.Command.Parameters.Add("cover", SqlDbType.Image);
+                sqladp.Command.Parameters["cover"].Value = imagebytes;
+                sqladp.Command.ExecuteNonQuery();
+            }
             MessageBox.Show("修改成功！", "消息");
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            string sql;
             modlyric2 = comboBox7.Text.Replace("'", "''");
             modsname2 = comboBox8.Text.Replace("'", "''");
             modarranger2 = comboBox9.Text.Replace("'", "''");
@@ -167,62 +132,55 @@ namespace touhou_music
             modorigin2 = comboBox12.Text.Replace("'", "''");
             if (modlyric2 != modlyric)
             {
-                connectSQL();
-                sql = "update [song] set lyric='" + modlyric2 + "' where scode='" + modscode + "'";
-                cmd = new SqlCommand(sql, conn);
-                cmd.ExecuteScalar();
-                closeSQL();
+                using (sqlAdapter sqladp = new sqlAdapter())
+                {
+                    sqladp.ExecuteScalar("update [song] set lyric='" + modlyric2 + "' where scode='" + modscode + "'");
+                }
                 MessageBox.Show("修改作词成功！", "消息");
             }
             if (modsname2 != modsname)
             {
-                connectSQL();
-                sql = "update [song] set sname='" + modsname2 + "' where scode='" + modscode + "'";
-                cmd = new SqlCommand(sql, conn);
-                cmd.ExecuteScalar();
-                closeSQL();
+                using (sqlAdapter sqladp = new sqlAdapter())
+                {
+                    sqladp.ExecuteScalar("update [song] set sname='" + modsname2 + "' where scode='" + modscode + "'");
+                }
                 MessageBox.Show("修改歌曲名成功！", "消息");
             }
             if (modarranger2 != modarranger)
             {
-                connectSQL();
-                sql = "update [song] set arranger='" + modarranger2 + "' where scode='" + modscode + "'";
-                cmd = new SqlCommand(sql, conn);
-                cmd.ExecuteScalar();
-                closeSQL();
+                using (sqlAdapter sqladp = new sqlAdapter())
+                {
+                    sqladp.ExecuteScalar("update [song] set arranger='" + modarranger2 + "' where scode='" + modscode + "'");
+                }
                 MessageBox.Show("修改编曲成功！", "消息");
             }
             if (modstyle2 != modstyle)
             {
-                connectSQL();
-                sql = "update [song] set style='" + modstyle2 + "' where scode='" + modscode + "'";
-                cmd = new SqlCommand(sql, conn);
-                cmd.ExecuteScalar();
-                closeSQL();
+                using (sqlAdapter sqladp = new sqlAdapter())
+                {
+                    sqladp.ExecuteScalar("update [song] set style='" + modstyle2 + "' where scode='" + modscode + "'");
+                }
                 MessageBox.Show("修改曲风成功！", "消息");
             }
             if (modvocal2 != modvocal)
             {
-                connectSQL();
-                sql = "update [song] set vocal='" + modvocal2 + "' where scode='" + modscode + "'";
-                cmd = new SqlCommand(sql, conn);
-                cmd.ExecuteScalar();
-                closeSQL();
+                using (sqlAdapter sqladp = new sqlAdapter())
+                {
+                    sqladp.ExecuteScalar("update [song] set vocal='" + modvocal2 + "' where scode='" + modscode + "'");
+                }
                 MessageBox.Show("修改歌手成功！", "消息");
             }
 
-            connectSQL();
-             sql = "select oricode from [ori] where origin = '" + modorigin2 + "'";
-            cmd = new SqlCommand(sql, conn);
-            modoricode2 = cmd.ExecuteScalar() as string;
-            closeSQL();
+            using (sqlAdapter sqladp = new sqlAdapter())
+            {
+                modoricode2 = sqladp.ExecuteScalar("select oricode from [ori] where origin = '" + modorigin2 + "'") as string;
+            }
             if (modoricode2 != modoricode)
             {
-                connectSQL();
-                sql = "update [song] set oricode='" + modoricode2 + "' where scode='" + modscode + "'";
-                cmd = new SqlCommand(sql, conn);
-                cmd.ExecuteScalar();
-                closeSQL();
+                using (sqlAdapter sqladp = new sqlAdapter())
+                {
+                    sqladp.ExecuteScalar("update [song] set oricode='" + modoricode2 + "' where scode='" + modscode + "'");
+                }
                 MessageBox.Show("修改原曲成功！", "消息");
             }
         }
@@ -235,7 +193,6 @@ namespace touhou_music
             comboBox3.Items.Clear();
             comboBox4.Items.Clear();
             comboBox5.Items.Clear();
-
             comboBox7.Items.Clear();
             comboBox8.Items.Clear();
             comboBox10.Items.Clear();
@@ -243,104 +200,53 @@ namespace touhou_music
             comboBox12.Items.Clear();
             comboBox9.Items.Clear();
 
-
             modacode = comboBox2.Text;
             modgcode = modacode.Substring(0, 4);
-            connectSQL();
-            DataSet ds = new DataSet();
+            List<DataTable> dt;
+            List<ComboBox> CB = new List<ComboBox>(4);
+            CB.Add(comboBox3);
+            CB.Add(comboBox4);
+            CB.Add(comboBox5);
+            CB.Add(comboBox6);
 
-            DataSet ds3 = new DataSet();
-            DataSet ds4 = new DataSet();
-            DataSet ds5 = new DataSet();
-            try
+            using (sqlAdapter sqladp = new sqlAdapter())
             {
-                SqlDataAdapter da = new SqlDataAdapter("select distinct gcode from [gas] where acode='" + modacode + "'", conn);
-
-                da.Fill(ds);
-                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                try
                 {
-                    comboBox1.Items.Add(ds.Tables[0].Rows[i][0]);
+                    sqladp.getDataTables(out dt,"select distinct gcode from [gas] where acode='" + modacode + "'");
+                    for (int i = 0; i < dt[0].Rows.Count; i++)
+                    {
+                        comboBox1.Items.Add(dt[0].Rows[i][0]);
+                    }
+                    comboBox1.SelectedIndex = 0;
+                    modgcode = comboBox1.Text;
+                    sqladp.getDataTables(out dt, "select gname from [group] where gcode='" + modgcode + "'", "select aname from [album] where acode='" + modacode + "'",
+                        "select [time] from [album] where acode='" + modacode + "'",
+                        "select distinct track from [song],gas where gas.scode=song.scode and acode='" + modacode + "'");
+                    comboBox6.Items.Clear();
+                    Program.fillIn(ref dt, ref CB);
+                    modgcode = comboBox1.Text;
+                    modgname = comboBox3.Text;
+                    modaname = comboBox4.Text;
+                    modtime = comboBox5.Text;
+                    comboBox6.SelectedIndex = 0;
                 }
-
-                comboBox1.SelectedIndex = 0;
-                modgcode = comboBox1.Text;
-
+                catch(Exception) { MessageBox.Show("无此曲目", "提示"); }
             }
-            catch { MessageBox.Show("无此曲目", "提示"); closeSQL(); return; }
-            SqlDataAdapter da3 = new SqlDataAdapter("select gname from [group] where gcode='" + modgcode + "'", conn);
-
-            da3.Fill(ds3);
-            for (int i = 0; i < ds3.Tables[0].Rows.Count; i++)
-            {
-                comboBox3.Items.Add(ds3.Tables[0].Rows[i][0]);
-            }
-
-            comboBox3.SelectedIndex = 0;
-            modgname = comboBox3.Text;
-
-            SqlDataAdapter da4 = new SqlDataAdapter("select aname from [album] where acode='" + modacode + "'", conn);
-
-            da4.Fill(ds4);
-            for (int i = 0; i < ds4.Tables[0].Rows.Count; i++)
-            {
-                comboBox4.Items.Add(ds4.Tables[0].Rows[i][0]);
-            }
-
-            comboBox4.SelectedIndex = 0;
-            modaname = comboBox4.Text;
-
-            SqlDataAdapter da5 = new SqlDataAdapter("select [time] from [album] where acode='" + modacode + "'", conn);
-
-            da5.Fill(ds5);
-            for (int i = 0; i < ds5.Tables[0].Rows.Count; i++)
-            {
-                comboBox5.Items.Add(ds5.Tables[0].Rows[i][0]);
-            }
-
-            comboBox5.SelectedIndex = 0;
-            modtime = comboBox5.Text;
-            comboBox6.Items.Clear();
-
-            SqlDataAdapter da6 = new SqlDataAdapter("select distinct track from [song],gas where gas.scode=song.scode and acode='" + modacode + "'", conn);
-
-            da6.Fill(ds6);
-            for (int i = 0; i < ds6.Tables[0].Rows.Count; i++)
-            {
-                comboBox6.Items.Add(ds6.Tables[0].Rows[i][0]);
-            }
-
-            comboBox6.SelectedIndex = 0;
-
-            closeSQL();
-
-
-
-
-
-
-
-            
 
             pictureBox1.Image = null;
           //  byte[] imagebytes = null;
 
-            connectSQL();
-
-            SqlCommand com = new SqlCommand("select cover from album where acode='" + modacode + "'", conn);
-            //" + tempaname + "
-            SqlDataReader dr = com.ExecuteReader();
-
-            while (dr.Read())
+            using (sqlAdapter sqladp = new sqlAdapter())
             {
-
-                imagebytes1 = (byte[])dr.GetValue(0);
-
+                SqlDataReader dr;
+                sqladp.getExecuteReader(out dr,"select cover from album where acode='" + modacode + "'");
+                while (dr.Read())
+                {
+                    imagebytes1 = (byte[])dr.GetValue(0);
+                }
+                dr.Close();
             }
-
-            dr.Close();
-
-            com.Clone();
-            closeSQL();
             if (imagebytes1 != null)
             {
                 if (imagebytes1[0] == 0)
@@ -348,31 +254,17 @@ namespace touhou_music
                     pictureBox1.Image = touhou_music.Properties.Resources.x;
                     return;
                 }
-
-
                 MemoryStream ms = new MemoryStream(imagebytes1);
-
                 Bitmap bmpt = new Bitmap(ms);
                 //Image image = Image.FromStream(ms, true);
                 //dr.Close();
                 //closeSQL();
                 pictureBox1.Image = bmpt;
-
-
-
-            
-
-
-
-
             }
         }
 
         private void comboBox6_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-
-
             comboBox7.Items.Clear();
             comboBox8.Items.Clear();
             comboBox10.Items.Clear();
@@ -381,109 +273,38 @@ namespace touhou_music
             comboBox9.Items.Clear();
             modtrack = comboBox6.Text;
             modscode = modacode + modtrack;
-            connectSQL();
 
-
-            DataSet ds7 = new DataSet();
-            DataSet ds8 = new DataSet();
-            DataSet ds9 = new DataSet();
-            DataSet ds10 = new DataSet();
-            DataSet ds11 = new DataSet();
-            DataSet ds12 = new DataSet();
-            DataSet ds122 = new DataSet();
+            List<DataTable> dt;
+            List<ComboBox> CB = new List<ComboBox>(6);
+            CB.Add(comboBox7);
+            CB.Add(comboBox8);
+            CB.Add(comboBox9);
+            CB.Add(comboBox10);
+            CB.Add(comboBox11);
+            CB.Add(comboBox12);
+            DataSet modOrigin = new DataSet();
             try
             {
-                SqlDataAdapter da7 = new SqlDataAdapter("select lyric from [song] where scode='" + modscode + "'", conn);
-
-                da7.Fill(ds7);
-                for (int i = 0; i < ds7.Tables[0].Rows.Count; i++)
+                using (sqlAdapter sqladp = new sqlAdapter())
                 {
-                    comboBox7.Items.Add(ds7.Tables[0].Rows[i][0]);
+                    sqladp.getDataSet("select origin from [ori],song where ori.oricode=song.oricode and scode='" + modscode + "'",out modOrigin);
+                    modorigin = modOrigin.Tables[0].Rows[0][0].ToString();
+
+                    sqladp.getDataTables(out dt, "select lyric from [song] where scode='" + modscode + "'",
+                        "select sname from [song] where scode='" + modscode + "'", "select arranger from [song] where scode='" + modscode + "'",
+                        "select style from [song] where scode='" + modscode + "'", "select vocal from [song] where scode='" + modscode + "'",
+                        "select distinct origin from [ori]");
+                    string sql = "select oricode from [ori] where origin = '" + modorigin + "'";
+                    modoricode = sqladp.ExecuteScalar(sql) as string;
                 }
-
-                comboBox7.SelectedIndex = 0;
-                modlyric = comboBox7.Text;
-
-                SqlDataAdapter da8 = new SqlDataAdapter("select sname from [song] where scode='" + modscode + "'", conn);
-
-                da8.Fill(ds8);
-                for (int i = 0; i < ds8.Tables[0].Rows.Count; i++)
-                {
-                    comboBox8.Items.Add(ds8.Tables[0].Rows[i][0]);
-                }
-
-                comboBox8.SelectedIndex = 0;
-                modsname = comboBox8.Text;
-
-                SqlDataAdapter da9 = new SqlDataAdapter("select arranger from [song] where scode='" + modscode + "'", conn);
-
-                da9.Fill(ds9);
-                for (int i = 0; i < ds9.Tables[0].Rows.Count; i++)
-                {
-                    comboBox9.Items.Add(ds9.Tables[0].Rows[i][0]);
-                }
-
-                comboBox9.SelectedIndex = 0;
-                modarranger = comboBox9.Text;
-
-                SqlDataAdapter da10 = new SqlDataAdapter("select style from [song] where scode='" + modscode + "'", conn);
-
-                da10.Fill(ds10);
-                for (int i = 0; i < ds10.Tables[0].Rows.Count; i++)
-                {
-                    comboBox10.Items.Add(ds10.Tables[0].Rows[i][0]);
-                }
-
-                comboBox10.SelectedIndex = 0;
-                modstyle = comboBox10.Text;
-
-                SqlDataAdapter da11 = new SqlDataAdapter("select vocal from [song] where scode='" + modscode + "'", conn);
-
-                da11.Fill(ds11);
-                for (int i = 0; i < ds11.Tables[0].Rows.Count; i++)
-                {
-                    comboBox11.Items.Add(ds11.Tables[0].Rows[i][0]);
-                }
-
-                comboBox11.SelectedIndex = 0;
-                modvocal = comboBox11.Text;
-
-                SqlDataAdapter da12 = new SqlDataAdapter("select origin from [ori],song where ori.oricode=song.oricode and scode='" + modscode + "'", conn);
-
-                da12.Fill(ds12);
-                for (int i = 0; i < ds12.Tables[0].Rows.Count; i++)
-                {
-                    comboBox12.Items.Add(ds12.Tables[0].Rows[i][0]);
-                }
-
-                comboBox12.SelectedIndex = 0;
-                modorigin = comboBox12.Text;
-
-
-                SqlDataAdapter da122 = new SqlDataAdapter("select distinct origin from [ori]", conn);
-
-                da122.Fill(ds122);
-                for (int i = 0; i < ds122.Tables[0].Rows.Count; i++)
-                {
-                    comboBox12.Items.Add(ds122.Tables[0].Rows[i][0]);
-                }
-
-                comboBox12.SelectedIndex = 0;
-
-                string sql = "select oricode from [ori] where origin = '" + modorigin + "'";
-                cmd = new SqlCommand(sql, conn);
-
-                modoricode = cmd.ExecuteScalar() as string;
-                closeSQL();
-
-
-
-
+                Program.fillIn(ref dt, ref CB);
+                
+                comboBox12.SelectedIndex = comboBox12.Items.IndexOf(modorigin);
             }
-            catch { MessageBox.Show("无此曲目", "提示"); closeSQL(); return; }
+            catch(Exception) { MessageBox.Show("无此曲目", "提示"); }
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
 
             OpenFileDialog openFileDialog1 = new OpenFileDialog();

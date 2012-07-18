@@ -114,9 +114,9 @@ namespace touhou_music
                 {
                     System.Diagnostics.Debug.Write(ex.Message);
                 }
-                    modgname = comboBox3.Text;
-                    modaname = comboBox4.Text;
-                    modtime = comboBox5.Text;
+                    //modgname = comboBox3.Text;
+                    //modaname = comboBox4.Text;
+                    //modtime = comboBox5.Text;
 
                     //  modacode = comboBox2.Text;
                     //  modtrack = comboBox6.Text;
