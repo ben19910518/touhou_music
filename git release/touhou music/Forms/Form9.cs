@@ -13,24 +13,11 @@ namespace touhou_music
 {
     public partial class Form9 : Form
     {
-        private SqlConnection conn;
-        private SqlCommand cmd;
         private string addoricode;
         private string addorigin;
         public Form9()
         {
             InitializeComponent();
-        }
-        private void connectSQL()
-        {
-            conn = new SqlConnection(DataPool.conString);
-
-            conn.Open();
-        }
-
-        private void closeSQL()
-        {
-            conn.Close();
         }
         private void button1_Click(object sender, EventArgs e)
         {
@@ -43,15 +30,18 @@ namespace touhou_music
             }
             try
             {
-                connectSQL();
-                string sql = "insert into [ori] values ('" + addoricode + "','" + addorigin + "')";
-                cmd = new SqlCommand(sql, conn);
-                cmd.ExecuteScalar();
-                closeSQL();
+                using (sqlAdapter sqladp = new sqlAdapter())
+                {
+                    string sql = "insert into [ori] values ('" + addoricode + "','" + addorigin + "')";
+                    sqladp.ExecuteScalar(sql);
+                }
             }
-            catch { MessageBox.Show("错误", "消息"); closeSQL(); return; }
+            catch (Exception)
+            {
+                MessageBox.Show("错误", "消息");
+                return;
+            }
             MessageBox.Show("添加成功！","消息");
-
         }
     }
 }

@@ -23,5 +23,23 @@ namespace touhou_music
             Application.Run(new Form2());
           
         }
+        public static void fillIn(ref List<DataTable> dt, ref List<ComboBox> CB)
+        {
+            for (int i = 0; i < dt.Count; i++)
+            {
+                try
+                {
+                    for (int j = 0; j < dt[i].Rows.Count; j++)
+                    {
+                        CB[i].Items.Add(dt[i].Rows[j][0]);
+                    }
+                    CB.ElementAt(i).SelectedIndex = 0;
+                }
+                catch (System.Exception ex)
+                {
+                    System.Diagnostics.Debug.Write(ex.Message);
+                }
+            }
+        }
     }
 }

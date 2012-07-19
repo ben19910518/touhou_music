@@ -4,44 +4,63 @@ using System.Linq;
 using System.Text;
 using System.Data.SqlClient;
 using System.Data;
+using System.Diagnostics;
 using touhou_music.datas;
 
 namespace touhou_music
 {
     class sqlAdapter : IDisposable
     {
-        private SqlConnection conn;
+        private static SqlConnection conn;
         private SqlCommand cmd;
-        public sqlAdapter(string connectCommand)
+        private bool flag = false;
+        static sqlAdapter()
         {
-            conn = new SqlConnection(connectCommand);
-            conn.Open();
+            conn = new SqlConnection(DataPool.conString);
+        }
+        public sqlAdapter()
+        {
+            try
+            {
+                sqlAdapter.conn.Open();
+            }
+            catch (System.InvalidOperationException ex)
+            {
+                Trace.WriteLine(ex.StackTrace);
+                return;
+            }
         }
         ~sqlAdapter()
         {
+            conn.Close();
             this.Dispose();
         }
         public void Dispose()
         {
             conn.Close();
-            conn.Dispose();
         }
         public void setCommand(string command)
         {
-            this.cmd = new SqlCommand(command, this.conn);
+            this.cmd = new SqlCommand(command, conn);
         }
         public System.Object ExecuteScalar(string command)
         {
             if (command == null)
                 return null;
-            cmd = new SqlCommand(command, this.conn);
+            cmd = new SqlCommand(command, conn);
             return cmd.ExecuteScalar();
+        }
+        public int ExecuteNonQuery(string command)
+        {
+            if (command == null)
+                return 0;
+            cmd = new SqlCommand(command, conn);
+            return cmd.ExecuteNonQuery();
         }
         public void getExecuteReader(out SqlDataReader ds, string command)
         {
-            cmd = new SqlCommand(command, this.conn);
+            cmd = new SqlCommand(command, conn);
             ds = cmd.ExecuteReader();
-            cmd = null;
         }
         public void getDataSet(string cmd, out DataSet ds)
         {
@@ -74,13 +93,13 @@ namespace touhou_music
             }
             return dt.Count;
         }
-        public SqlConnection Connection()
+        public SqlConnection Connection
         {
-            return this.conn;
+            get { return conn; }
         }
-        public SqlCommand Command()
+        public SqlCommand Command
         {
-            return this.cmd;
+            get { return this.cmd; }
         }
     }
 
